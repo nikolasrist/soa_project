@@ -41,10 +41,10 @@ fun printAccountList(accountList: AccountList) {
 
 fun printAccount(account: Account) {
     println("Account Infos:")
-    println("FullName: " + account.fullName())
-    println("EmpNumber: " + account.empNumber)
-    println("EmployeeId: " + account.employeeId)
-    println("Deleted?: " + account.deletedEmployee)
+    println("FullName: " + account.employeeName)
+    println("UserName: " + account.userName)
+    println("Role: " + account.userRole)
+    println("Status: " + account.status)
     println("-------------------")
 }
 
