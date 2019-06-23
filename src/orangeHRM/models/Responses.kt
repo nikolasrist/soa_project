@@ -27,6 +27,25 @@ data class TokenResponse(
     @JsonProperty("token_type")    val tokenType: String
 )
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class Organization(
+    val id: Int,
+    val name: String,
+    val taxId: String,
+    val registrationNumber: String,
+    val phone: String,
+    val fax: String,
+    val email: String,
+    val country: String,
+    val province: String,
+    val city: String,
+    val zipCode: String,
+    val street1: String,
+    val street2: String,
+    val note: String,
+    val numberOfEmployees: Int
+)
+
 sealed class Response
 
 data class AccountResponse(
@@ -35,6 +54,10 @@ data class AccountResponse(
 
 data class AccountListResponse(
     val data: AccountList
+) : Response()
+
+data class OrganizationResponse(
+    val data: Organization
 ) : Response()
 
 data class ErrorResponse(

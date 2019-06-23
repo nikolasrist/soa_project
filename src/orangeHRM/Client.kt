@@ -28,6 +28,7 @@ class OrangeCRMClient {
     val oauthApiBaseUrl = "/symfony/web/index.php"
     val oauthApi = "/oauth/issueToken"
     val userApi = "/user"
+    val organizationApi = "/organization"
     val tokenPrefix = "Bearer "
     var token = ""
     var expiresTime: Instant = Instant.now()
@@ -64,8 +65,12 @@ class OrangeCRMClient {
         return AccountResponse(httpResponse.receive())
     }
 
-    suspend fun getOrganization(): String {
-        val httpResponse = client.get<HttpResponse>()
+    suspend fun getOrganization(): Response {
+        val httpResponse = client.get<HttpResponse>("$baseUrl$apiBaseUrl$organizationApi")
+        if (httpResponse.status != HttpStatusCode.OK) {
+            return ErrorResponse("Failed to retrieve organization.", httpResponse.status)
+        }
+        return OrganizationResponse(httpResponse.receive())
     }
 
 
