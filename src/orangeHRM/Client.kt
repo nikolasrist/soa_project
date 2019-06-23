@@ -22,8 +22,8 @@ import java.time.Instant
 
 
 class OrangeCRMClient {
-//    val baseUrl = "https://sepp-hrm.inf.h-brs.de"
-    val baseUrl = "https://orangehrm.ironmanserver.de/"
+//    val baseUrl = "https://sepp-hrm.inf.h-brs.de" // for hbrs server
+    val baseUrl = "https://orangehrm.ironmanserver.de" //for private server
     val apiBaseUrl = "/symfony/web/api/v1"
     val oauthApiBaseUrl = "/symfony/web/index.php"
     val oauthApi = "/oauth/issueToken"
@@ -33,6 +33,10 @@ class OrangeCRMClient {
     var token = ""
     var expiresTime: Instant = Instant.now()
 
+    // hbrs server
+//    val clientId = "tom"
+//    val clientSecret = "tom123"
+    // private server
     val clientId = "admin"
     val clientSecret = "admin"
 
