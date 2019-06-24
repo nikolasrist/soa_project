@@ -22,9 +22,8 @@ import java.time.Instant
 
 
 class OrangeCRMClient {
-//    val baseUrl = "https://sepp-hrm.inf.h-brs.de" // for hbrs server
-    val baseUrl = "https://orangehrm.ironmanserver.de" //for private server
-    val apiBaseUrl = "/symfony/web/api/v1"
+    val baseUrl = "https://sepp-hrm.inf.h-brs.de" // for hbrs server
+    val apiBaseUrl = "/symfony/web/index.php/api/v1"
     val oauthApiBaseUrl = "/symfony/web/index.php"
     val oauthApi = "/oauth/issueToken"
     val userApi = "/user"
@@ -33,12 +32,9 @@ class OrangeCRMClient {
     var token = ""
     var expiresTime: Instant = Instant.now()
 
-    // hbrs server
-//    val clientId = "tom"
-//    val clientSecret = "tom123"
-    // private server
-    val clientId = "admin"
-    val clientSecret = "admin"
+    // hbrs server credentials
+    val clientId = "tom"
+    val clientSecret = "tom123"
 
     val client = HttpClient(Apache) {
         install(JsonFeature) {
@@ -79,24 +75,21 @@ class OrangeCRMClient {
 
 
     suspend fun setToken() {
-        println("check token refresh")
+        println("set token")
         if (Instant.now() > expiresTime) {
-            println("try to refresh token")
             val requestUrl = "$baseUrl$oauthApiBaseUrl$oauthApi"
-            println("Request URL: $requestUrl")
             var data = parametersOf(
                 Pair("client_id", listOf(clientId)),
                 Pair("client_secret", listOf(clientSecret)),
                 Pair("grant_type", listOf("client_credentials"))
             )
-            println(data)
             val response = client.submitForm<HttpResponse>(url = requestUrl, formParameters = data)
             val responseText = response.readText()
             val mapper = jacksonObjectMapper()
             val readValue = mapper.readValue<TokenResponse>(responseText)
             expiresTime = Instant.now().plusMillis(readValue.expiresIn)
             token = readValue.accessToken
-            println("Token: $token \nExpiresIn: $expiresTime")
+            println("Token: $token \nExpiresTime: $expiresTime")
         }
     }
 }
