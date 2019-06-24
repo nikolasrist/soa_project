@@ -1,5 +1,7 @@
 package orangeHRM
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import kotlinx.coroutines.runBlocking
 import orangeHRM.models.*
 
@@ -8,13 +10,6 @@ fun main() = runBlocking {
     println("Start client")
     val oHRMClient = OrangeCRMClient()
     oHRMClient.setToken()
-//    val accountId = "0001"
-//    println("Get Account for ID: " + accountId)
-//    val accountResponse = oHRMClient.getAccount(accountId)
-//    when (accountResponse) {
-//        is AccountResponse -> printAccount(accountResponse.data)
-//        is ErrorResponse -> printError(accountResponse)
-//    }
 
     println("Get all accounts:")
     val accountListResponse = oHRMClient.getAllAccounts()
@@ -22,6 +17,22 @@ fun main() = runBlocking {
         is AccountListResponse -> printAccountList(accountListResponse.data)
         is ErrorResponse -> printError(accountListResponse)
     }
+
+    println("Get Organization:")
+    val organizationResponse = oHRMClient.getOrganization()
+    when (organizationResponse) {
+        is OrganizationResponse -> printOrganization(organizationResponse.data)
+        is ErrorResponse -> printError(organizationResponse)
+    }
+}
+
+fun printOrganization(data: Organization) {
+    println("Organization Infos: ")
+    println("ID: ${data.id}")
+    println("Name: ${data.name}")
+    println("email: ${data.email}")
+    println("country: ${data.country}")
+    println("number of employees: ${data.numberOfEmployees}")
 }
 
 fun printError(responseError: ErrorResponse) {

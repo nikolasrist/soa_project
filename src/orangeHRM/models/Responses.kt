@@ -11,7 +11,8 @@ data class Account(
     val userName: String,
     val userRole: String,
     val status: String,
-    val employeeName: String
+    val employeeName: String,
+    val employeeId: String
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -29,21 +30,11 @@ data class TokenResponse(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Organization(
-    val id: Int,
+    val id: String,
     val name: String,
-    val taxId: String,
-    val registrationNumber: String,
-    val phone: String,
-    val fax: String,
-    val email: String,
+    val email: String?,
     val country: String,
-    val province: String,
-    val city: String,
-    val zipCode: String,
-    val street1: String,
-    val street2: String,
-    val note: String,
-    val numberOfEmployees: Int
+    val numberOfEmployees: String
 )
 
 sealed class Response
@@ -52,10 +43,12 @@ data class AccountResponse(
     val data: Account
 ) : Response()
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class AccountListResponse(
     val data: AccountList
 ) : Response()
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class OrganizationResponse(
     val data: Organization
 ) : Response()

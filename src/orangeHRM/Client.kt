@@ -45,7 +45,7 @@ class OrangeCRMClient {
             serializer = JacksonSerializer()
         }
         install(Logging) {
-            level = LogLevel.ALL
+            level = LogLevel.INFO
         }
         defaultRequest {
             header("Authorization", "$tokenPrefix$token")
@@ -74,7 +74,7 @@ class OrangeCRMClient {
         if (httpResponse.status != HttpStatusCode.OK) {
             return ErrorResponse("Failed to retrieve organization.", httpResponse.status)
         }
-        return OrganizationResponse(httpResponse.receive())
+        return httpResponse.receive<OrganizationResponse>()
     }
 
 
