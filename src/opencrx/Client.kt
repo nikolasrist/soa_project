@@ -14,6 +14,8 @@ import opencrx.models.AccountListResponse
 import opencrx.models.AccountResponse
 import opencrx.models.ErrorResponse
 import opencrx.models.Response
+val accountUrl =
+    "http://sepp-crm.inf.h-brs.de/opencrx-rest-CRX/org.opencrx.kernel.account1/provider/CRX/segment/Standard/account/"
 
 val client = HttpClient(Apache) {
     install(JsonFeature) {
@@ -27,15 +29,15 @@ val client = HttpClient(Apache) {
     }
 }
 
-suspend fun getAccount(url: String, id: String): Response {
-    val accountResponse = client.get<HttpResponse>(url + id)
+suspend fun getAccount(id: String): Response {
+    val accountResponse = client.get<HttpResponse>(accountUrl + id)
     if (accountResponse.status == HttpStatusCode.OK) {
         return AccountResponse(accountResponse.receive())
     }
     return ErrorResponse("Failed to retrieve account: " + id, accountResponse.status)
 }
 
-suspend fun getAllAccounts(accountUrl: String): Response {
+suspend fun getAllAccounts(): Response {
     val accountListResponse = client.get<HttpResponse>(accountUrl)
     if (accountListResponse.status == HttpStatusCode.OK) {
         return AccountListResponse(accountListResponse.receive())
