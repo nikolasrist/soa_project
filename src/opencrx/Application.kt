@@ -6,9 +6,7 @@ import opencrx.utils.printAccount
 import opencrx.utils.printAccountList
 import opencrx.utils.printError
 
-
 val accountId = "RC9375R5ALYW9H84KQGL5CLHT"
-
 
 fun main() = runBlocking {
     println("Start client")
