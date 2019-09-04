@@ -34,7 +34,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.camunda.bpm.dmn:camunda-engine-feel-api:7.11.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.camunda.bpm.dmn:camunda-engine-feel-juel:7.11.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.camunda.commons:camunda-commons-logging:1.7.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.slf4j:slf4j-api:1.7.26" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.camunda.commons:camunda-commons-typed-values:1.7.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.mybatis:mybatis:3.4.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.springframework:spring-beans:3.2.18.RELEASE" level="project" />
@@ -43,5 +42,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.code.gson:gson:2.8.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: joda-time:joda-time:2.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.1" level="project" />
   </component>
 </module>
