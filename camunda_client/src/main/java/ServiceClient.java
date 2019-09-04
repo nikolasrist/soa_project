@@ -16,39 +16,41 @@ public class ServiceClient implements JavaDelegate {
 
         LOG.info("Send request to Data collector.");
 
-//        HttpURLConnection connection = null;
-//        String targetURL = ""; // TODO: 2019-09-02 add correct url
-//        try {
-//            //Create connection
-//            URL url = new URL(targetURL);
-//            connection = (HttpURLConnection) url.openConnection();
-//            connection.setRequestMethod("POST");
-//            connection.setRequestProperty("Content-Type",
-//                "application/x-www-form-urlencoded");
-//            connection.setRequestProperty("Content-Language", "en-US");
-//            connection.setUseCaches(false);
-//            connection.setDoOutput(true);
-//
-//            //Send request
-//            DataOutputStream wr = new DataOutputStream (
-//                connection.getOutputStream());
-//            wr.close();
-//
-//            //Get Response
-//            InputStream is = connection.getInputStream();
-//            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-//            StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
-//            String line;
-//            while ((line = rd.readLine()) != null) {
-//                response.append(line);
-//                response.append('\r');
-//            }
-//            rd.close();
-//            System.out.println(response.toString());
-//        } finally {
-//            if (connection != null) {
-//                connection.disconnect();
-//            }
-//        }
+        HttpURLConnection connection = null;
+        String targetURL = "https://data-collector.ironmanserver.de"; // TODO: 2019-09-02 add correct url
+        try {
+            //Create connection
+            URL url = new URL(targetURL);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type",
+                "application/x-www-form-urlencoded");
+            connection.setRequestProperty("Content-Language", "en-US");
+            connection.setUseCaches(false);
+            connection.setDoOutput(true);
+
+            //Send request
+            DataOutputStream wr = new DataOutputStream (
+                connection.getOutputStream());
+            wr.close();
+
+            //Get Response
+            InputStream is = connection.getInputStream();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+            StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
+            String line;
+            while ((line = rd.readLine()) != null) {
+                response.append(line);
+                response.append('\r');
+            }
+            rd.close();
+            System.out.println(response.toString());
+            execution.setVariable("listOfSalsemen", response.toString());
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+
     }
 }
