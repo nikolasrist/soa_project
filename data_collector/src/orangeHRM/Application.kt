@@ -1,12 +1,10 @@
 package orangeHRM
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import kotlinx.coroutines.runBlocking
 import orangeHRM.models.*
 import orangeHRM.utils.printAccountList
+import orangeHRM.utils.printEmployeeList
 import orangeHRM.utils.printError
-import orangeHRM.utils.printOrganization
 
 
 fun main() = runBlocking {
@@ -15,16 +13,16 @@ fun main() = runBlocking {
     oHRMClient.setToken()
 
     println("Get all accounts:")
-    val accountListResponse = oHRMClient.getAllAccounts()
-    when (accountListResponse) {
+    when (val accountListResponse = oHRMClient.getAllAccounts()) {
         is AccountListResponse -> printAccountList(accountListResponse.data)
         is ErrorResponse -> printError(accountListResponse)
     }
 
-    println("Get Organization:")
-    val organizationResponse = oHRMClient.getOrganization()
-    when (organizationResponse) {
-        is OrganizationResponse -> printOrganization(organizationResponse.data)
-        is ErrorResponse -> printError(organizationResponse)
+    println("Get all employees:")
+    when (val employeeListResponse = oHRMClient.getAllEmployees()) {
+        is EmployeeListResponse -> printEmployeeList(employeeListResponse.data)
+        is ErrorResponse -> printError(employeeListResponse)
     }
+
+
 }

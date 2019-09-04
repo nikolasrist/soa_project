@@ -7,6 +7,19 @@ import io.ktor.http.HttpStatusCode
 import java.util.*
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+data class Employee(
+    val firstName: String,
+    val lastName: String,
+    val employeeId: String,
+    val jobTitle: String
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class EmployeeList(
+    val data: List<Employee>
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Account(
     val userName: String,
     val userRole: String,
@@ -38,6 +51,11 @@ data class Organization(
 )
 
 sealed class Response
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class EmployeeListResponse(
+    val data: EmployeeList
+) : Response()
 
 data class AccountResponse(
     val data: Account

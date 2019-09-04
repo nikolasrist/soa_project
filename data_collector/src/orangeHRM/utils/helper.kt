@@ -1,9 +1,6 @@
 package orangeHRM.utils
 
-import orangeHRM.models.Account
-import orangeHRM.models.AccountList
-import orangeHRM.models.ErrorResponse
-import orangeHRM.models.Organization
+import orangeHRM.models.*
 
 
 fun printOrganization(data: Organization) {
@@ -36,5 +33,20 @@ fun printAccount(account: Account) {
     println("UserName: " + account.userName)
     println("Role: " + account.userRole)
     println("Status: " + account.status)
+    println("-------------------")
+}
+
+fun printEmployeeList(employeeList: EmployeeList) {
+    for (emp in employeeList.data) {
+        printEmployee(emp)
+    }
+}
+
+fun printEmployee(emp: Employee) {
+    println("Employee Infos:")
+    println("FirstName: " + emp.firstName)
+    println("LastName: " + emp.lastName)
+    println("JobTitle: " + emp.jobTitle)
+    println("EmployeeId: " + emp.employeeId)
     println("-------------------")
 }

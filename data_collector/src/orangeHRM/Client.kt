@@ -27,6 +27,7 @@ class OrangeCRMClient {
     val oauthApiBaseUrl = "/symfony/web/index.php"
     val oauthApi = "/oauth/issueToken"
     val userApi = "/user"
+    val employeesApi = "/employee/search"
     val organizationApi = "/organization"
     val tokenPrefix = "Bearer "
     var token = ""
@@ -48,6 +49,14 @@ class OrangeCRMClient {
         }
     }
 
+
+    suspend fun getAllEmployees(): Response{
+        val httpResponse = client.get<HttpResponse>("$baseUrl$apiBaseUrl$employeesApi")
+        if (httpResponse.status != HttpStatusCode.OK) {
+            return ErrorResponse("Failed to retrieve employees.", httpResponse.status)
+        }
+        return EmployeeListResponse(httpResponse.receive())
+    }
 
     suspend fun getAllAccounts(): Response {
         val httpResponse = client.get<HttpResponse>("$baseUrl$apiBaseUrl$userApi")
