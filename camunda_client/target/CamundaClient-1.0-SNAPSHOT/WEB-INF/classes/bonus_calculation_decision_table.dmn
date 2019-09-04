@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_00aee79" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.3.2">
+  <decision id="Decision_1eogn71" name="BonusCalculation">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1" hitPolicy="COLLECT">
+      <input id="input_1" label="Orders Evaluation">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1fsxftz">
+        <inputExpression id="LiteralExpression_148v3di" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" typeRef="integer" />
+      <rule id="DecisionRule_1m00cqn">
+        <inputEntry id="UnaryTests_0zwn1l8">
+          <text>"name-of-product"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ff23u6">
+          <text>"client-ranking"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1pe1wc0">
+          <text>"bonus"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_13m0gut">
+        <inputEntry id="UnaryTests_1pt3rmu">
+          <text>"client"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13z9i2v">
+          <text>"items"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0zwm5kj">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1hm1fax">
+        <inputEntry id="UnaryTests_0gltvmw">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dcb6o9">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_035mph0">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0xlnj7o">
+        <inputEntry id="UnaryTests_0hjxxvm">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dhm4r6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0x61bpn">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_045v07g">
+        <inputEntry id="UnaryTests_14oqd41">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dg05rt">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1std2lp">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
