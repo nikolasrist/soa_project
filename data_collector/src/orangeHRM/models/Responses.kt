@@ -57,11 +57,6 @@ data class EmployeeListResponse(
     val data: EmployeeList
 ) : Response()
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-data class EmployeeResponse(
-    val data: Employee
-) : Response()
-
 data class AccountResponse(
     val data: Account
 ) : Response()
