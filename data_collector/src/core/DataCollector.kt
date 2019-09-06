@@ -15,6 +15,7 @@ import orangeHRM.models.Employee
 import orangeHRM.models.EmployeeListResponse
 import orangeHRM.models.EmployeeResponse
 import orangeHRM.models.ErrorResponse
+import orangeHRM.utils.printEmployee
 import orangeHRM.utils.printError
 
 fun main(args: Array<String>) {
@@ -24,6 +25,7 @@ fun main(args: Array<String>) {
         }
         install(StatusPages) {
             exception<Throwable> { cause ->
+                println(cause)
                 call.respond(HttpStatusCode.InternalServerError)
             }
             exception<NotFoundException> { cause ->
@@ -32,6 +34,9 @@ fun main(args: Array<String>) {
         }
         routing {
             route("/") {
+                get() {
+                    call.respond(getSalesmen())
+                }
                 get("salesman/{name}") {
                     val name = call.parameters["name"]
                     call.respond(getSalesman(name!!))
@@ -59,12 +64,12 @@ suspend fun getSalesmen(): List<Employee> {
 suspend fun getSalesman (employeeName: String): Employee {
     val oHRMClient = OrangeHRMClient()
     oHRMClient.setToken()
-    val employeeResponse = oHRMClient.getEmployee(employeeName)
-    return when (employeeResponse) {
-        is EmployeeResponse -> {
-            employeeResponse.data
+    return when (val employeeResponse = oHRMClient.getEmployee(employeeName)) {
+        is EmployeeListResponse -> {
+            employeeResponse.data.data[0]
         }
         is ErrorResponse -> {
+            println("Error returned.")
             printError(employeeResponse)
             throw NotFoundException()
         }
