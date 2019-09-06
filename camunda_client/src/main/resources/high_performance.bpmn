@@ -8,10 +8,10 @@
       <bpmn:lane id="Lane_0qnl8s7" name="Performance Calculation">
         <bpmn:flowNodeRef>Task_1psmrxu</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>UserTask_059pb4t</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_1x8u4v6</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_1y5a1kx</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>BusinessRuleTask_1wnlaxi</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ServiceTask_1rraefl</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1x8u4v6</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1lv69z1" name="Data Collector">
         <bpmn:flowNodeRef>Task_160enre</bpmn:flowNodeRef>
@@ -45,10 +45,6 @@
     <bpmn:startEvent id="StartEvent_1y5a1kx">
       <bpmn:outgoing>SequenceFlow_1yix84q</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:task id="Task_1x8u4v6" name="Calculate &#34;Client Ranking&#34; for each Salesman">
-      <bpmn:incoming>SequenceFlow_1yix84q</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0uiixca</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:userTask id="UserTask_059pb4t" name="CEO Reflects all boni">
       <bpmn:incoming>SequenceFlow_1fv4tys</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1whv2ep</bpmn:outgoing>
@@ -85,6 +81,15 @@
       <bpmn:incoming>SequenceFlow_0uiixca</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_19vheyx</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:userTask id="Task_1x8u4v6" name="Calculate &#34;Client Ranking&#34; for Salesman" camunda:formKey="SalesmanDetails">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="NameField" label="Name" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1yix84q</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0uiixca</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:textAnnotation id="TextAnnotation_1h2rjb5">
       <bpmn:text>Implement in Microservice</bpmn:text>
     </bpmn:textAnnotation>
@@ -112,9 +117,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_1y5a1kx_di" bpmnElement="StartEvent_1y5a1kx">
         <dc:Bounds x="232" y="406" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_1x8u4v6_di" bpmnElement="Task_1x8u4v6">
-        <dc:Bounds x="320" y="384" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_059pb4t_di" bpmnElement="UserTask_059pb4t">
         <dc:Bounds x="1235" y="386" width="100" height="80" />
@@ -175,8 +177,8 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0uiixca_di" bpmnElement="SequenceFlow_0uiixca">
         <di:waypoint x="420" y="424" />
-        <di:waypoint x="495" y="424" />
-        <di:waypoint x="495" y="420" />
+        <di:waypoint x="500" y="424" />
+        <di:waypoint x="500" y="420" />
         <di:waypoint x="570" y="420" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1yix84q_di" bpmnElement="SequenceFlow_1yix84q">
@@ -198,6 +200,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_0odni3i_di" bpmnElement="ServiceTask_1rraefl">
         <dc:Bounds x="570" y="380" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_16wtlng_di" bpmnElement="Task_1x8u4v6">
+        <dc:Bounds x="320" y="384" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
