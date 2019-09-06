@@ -81,7 +81,7 @@
       <bpmn:incoming>SequenceFlow_0uiixca</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_19vheyx</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Task_1x8u4v6" name="Calculate &#34;Client Ranking&#34; for Salesman" camunda:formKey="SalesmanDetails">
+    <bpmn:userTask id="Task_1x8u4v6" name="Calculate &#34;Client Ranking&#34; for Salesman">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="NameField" label="Name" type="string" />
