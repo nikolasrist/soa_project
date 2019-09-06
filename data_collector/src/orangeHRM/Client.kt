@@ -21,7 +21,7 @@ import orangeHRM.models.*
 import java.time.Instant
 
 
-class OrangeCRMClient {
+class OrangeHRMClient {
     val baseUrl = "https://sepp-hrm.inf.h-brs.de" // for hbrs server
     val apiBaseUrl = "/symfony/web/index.php/api/v1"
     val oauthApiBaseUrl = "/symfony/web/index.php"
@@ -52,6 +52,14 @@ class OrangeCRMClient {
 
     suspend fun getAllEmployees(): Response{
         val httpResponse = client.get<HttpResponse>("$baseUrl$apiBaseUrl$employeesApi")
+        if (httpResponse.status != HttpStatusCode.OK) {
+            return ErrorResponse("Failed to retrieve employees.", httpResponse.status)
+        }
+        return EmployeeListResponse(httpResponse.receive())
+    }
+
+    suspend fun getEmployee(name: String): Response{
+        val httpResponse = client.get<HttpResponse>("$baseUrl$apiBaseUrl$employeesApi?name=$name")
         if (httpResponse.status != HttpStatusCode.OK) {
             return ErrorResponse("Failed to retrieve employees.", httpResponse.status)
         }

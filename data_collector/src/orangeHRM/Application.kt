@@ -9,7 +9,7 @@ import orangeHRM.utils.printError
 
 fun main() = runBlocking {
     println("Start client")
-    val oHRMClient = OrangeCRMClient()
+    val oHRMClient = OrangeHRMClient()
     oHRMClient.setToken()
 
     println("Get all accounts:")

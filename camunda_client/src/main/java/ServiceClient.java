@@ -23,7 +23,7 @@ public class ServiceClient implements JavaDelegate {
         LOG.info("Salesman chosen: {}", salesman);
 
 //        HttpURLConnection connection = null;
-//        String targetURL = "https://data-collector.ironmanserver.de"; // TODO: 2019-09-02 add correct url
+//        String targetURL = "https://data-collector.ironmanserver.de/salesman/John Doe"; // TODO: 2019-09-02 add correct url
 //        try {
 //            //Create connection
 //            URL url = new URL(targetURL);
