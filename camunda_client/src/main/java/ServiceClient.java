@@ -1,10 +1,11 @@
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.*;
 import java.util.Set;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestFactory;
+import com.google.api.client.http.javanet.NetHttpTransport;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
@@ -19,44 +20,26 @@ public class ServiceClient implements JavaDelegate {
 
         Set<String> variableNames = execution.getVariableNames();
         LOG.info("Variables: {}", variableNames);
-        String salesman = (String) execution.getVariable("NameField");
-        LOG.info("Salesman chosen: {}", salesman);
+        String salesmanName = (String) execution.getVariable("NameField");
+        LOG.info("Salesman chosen: {}", salesmanName);
+        String response = callEndpoint(salesmanName);
+        Salesman salesman = mapResponse(response);
+        System.out.println(salesman);
+    }
 
-//        HttpURLConnection connection = null;
-//        String targetURL = "https://data-collector.ironmanserver.de/salesman/John Doe"; // TODO: 2019-09-02 add correct url
-//        try {
-//            //Create connection
-//            URL url = new URL(targetURL);
-//            connection = (HttpURLConnection) url.openConnection();
-//            connection.setRequestMethod("GET");
-//            connection.setRequestProperty("Content-Type",
-//                "application/x-www-form-urlencoded");
-//            connection.setRequestProperty("Content-Language", "en-US");
-//            connection.setUseCaches(false);
-//            connection.setDoOutput(true);
-//
-//            //Send request
-//            DataOutputStream wr = new DataOutputStream (
-//                connection.getOutputStream());
-//            wr.close();
-//
-//            //Get Response
-//            InputStream is = connection.getInputStream();
-//            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-//            StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
-//            String line;
-//            while ((line = rd.readLine()) != null) {
-//                response.append(line);
-//                response.append('\r');
-//            }
-//            rd.close();
-//            System.out.println(response.toString());
-//            execution.setVariable("listOfSalsemen", response.toString());
-//        } finally {
-//            if (connection != null) {
-//                connection.disconnect();
-//            }
-//        }
+    static Salesman mapResponse(String response) throws IOException {
+        ObjectMapper oMapper = new ObjectMapper();
+        return oMapper.readValue(response, Salesman.class);
+    }
 
+
+    public static String callEndpoint(String name) throws IOException {
+        HttpRequestFactory requestFactory
+                = new NetHttpTransport().createRequestFactory();
+        HttpRequest request = requestFactory.buildGetRequest(
+                new GenericUrl("http://192.168.2.169:9050/salesman/"+name.trim().replace(" ", "%20")));
+        String rawResponse = request.execute().parseAsString();
+        return rawResponse;
     }
 }
+

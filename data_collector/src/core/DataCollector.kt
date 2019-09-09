@@ -13,13 +13,12 @@ import io.ktor.server.engine.*
 import orangeHRM.OrangeHRMClient
 import orangeHRM.models.Employee
 import orangeHRM.models.EmployeeListResponse
-import orangeHRM.models.EmployeeResponse
 import orangeHRM.models.ErrorResponse
 import orangeHRM.utils.printEmployee
 import orangeHRM.utils.printError
 
 fun main(args: Array<String>) {
-    embeddedServer(Netty, 8080) {
+    embeddedServer(Netty, 9050) {
         install(ContentNegotiation){
             jackson{}
         }

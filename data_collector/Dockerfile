@@ -5,7 +5,6 @@ RUN adduser -D -g '' $APPLICATION_USER
 
 RUN mkdir /app
 RUN chown -R $APPLICATION_USER /app
-
 USER $APPLICATION_USER
 
 COPY ./build/libs/data-collector.jar /app/data-collector.jar

@@ -10,12 +10,11 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.request.get
 import io.ktor.client.response.HttpResponse
 import io.ktor.http.HttpStatusCode
-import opencrx.models.AccountListResponse
-import opencrx.models.AccountResponse
-import opencrx.models.ErrorResponse
-import opencrx.models.Response
+import opencrx.models.*
+
 val accountUrl =
     "http://sepp-crm.inf.h-brs.de/opencrx-rest-CRX/org.opencrx.kernel.account1/provider/CRX/segment/Standard/account/"
+
 
 val client = HttpClient(Apache) {
     install(JsonFeature) {
@@ -34,7 +33,22 @@ suspend fun getAccount(id: String): Response {
     if (accountResponse.status == HttpStatusCode.OK) {
         return AccountResponse(accountResponse.receive())
     }
-    return ErrorResponse("Failed to retrieve account: " + id, accountResponse.status)
+    return ErrorResponse("Failed to retrieve account: $id", accountResponse.status)
+}
+
+suspend fun getAssignedContract(assignedContractsUrl: String): Response {
+    val contractListResponse = client.get<HttpResponse>("$assignedContractsUrl/assignedContract")
+    if (contractListResponse.status == HttpStatusCode.OK) {
+        return ContractListResponse(contractListResponse.receive())
+    }
+    return ErrorResponse("Failed to retrieve assigned contract list.", contractListResponse.status)
+}
+suspend fun getSalesOrderPosition(salesOrderUrl: String): Response {
+    val salesOrderPositionListResponse = client.get<HttpResponse>("$salesOrderUrl/position")
+    if (salesOrderPositionListResponse.status == HttpStatusCode.OK) {
+        return SalesOrderPositionListResponse(salesOrderPositionListResponse.receive())
+    }
+    return ErrorResponse("Failed to retrieve sales order position list.", salesOrderPositionListResponse.status)
 }
 
 suspend fun getAllAccounts(): Response {

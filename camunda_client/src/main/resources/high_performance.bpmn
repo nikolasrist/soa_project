@@ -1,35 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0alxcwu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.2">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0alxcwu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.1.0">
   <bpmn:collaboration id="Collaboration_04jwzxq">
     <bpmn:participant id="Participant_1ywuare" name="HighPerformance" processRef="Process_0k6k520" />
   </bpmn:collaboration>
   <bpmn:process id="Process_0k6k520" name="HighPerformanceBonusCalculation" isExecutable="true">
     <bpmn:laneSet id="LaneSet_1ws2r0t">
       <bpmn:lane id="Lane_0qnl8s7" name="Performance Calculation">
+        <bpmn:flowNodeRef>BusinessRuleTask_1wnlaxi</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_1y5a1kx</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1x8u4v6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_1rraefl</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1psmrxu</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>UserTask_059pb4t</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>StartEvent_1y5a1kx</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>BusinessRuleTask_1wnlaxi</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ServiceTask_1rraefl</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_1x8u4v6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SubProcess_0k72z16</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1lv69z1" name="Data Collector">
-        <bpmn:flowNodeRef>Task_160enre</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_0ykk86k</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_0lkp32v</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ServiceTask_1srv8mj</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ServiceTask_0afid4w</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ServiceTask_0nnc71r</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_0fymlff</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_0nnc71r</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_0afid4w</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_1srv8mj</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0lkp32v</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0ykk86k</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_160enre</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:endEvent id="EndEvent_0fymlff">
       <bpmn:incoming>SequenceFlow_1ovc355</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:businessRuleTask id="BusinessRuleTask_1wnlaxi" name="BonusCalculation" camunda:decisionRef="Decision_1eogn71">
-      <bpmn:incoming>SequenceFlow_1xo24sq</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1fv4tys</bpmn:outgoing>
-    </bpmn:businessRuleTask>
     <bpmn:serviceTask id="ServiceTask_0nnc71r" name="Collect Data from OrangeHRM" camunda:type="external" camunda:topic="OrangeHRM">
       <bpmn:incoming>SequenceFlow_19vheyx</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1dq8h8n</bpmn:outgoing>
@@ -45,14 +42,6 @@
     <bpmn:startEvent id="StartEvent_1y5a1kx">
       <bpmn:outgoing>SequenceFlow_1yix84q</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:userTask id="UserTask_059pb4t" name="CEO Reflects all boni">
-      <bpmn:incoming>SequenceFlow_1fv4tys</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1whv2ep</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:task id="Task_1psmrxu" name="Send calculated data to &#34;Data Collector&#34;">
-      <bpmn:incoming>SequenceFlow_1whv2ep</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0lv64mp</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:task id="Task_0lkp32v" name="Inform HR about finish">
       <bpmn:incoming>SequenceFlow_05nscxi</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1ovc355</bpmn:outgoing>
@@ -73,14 +62,9 @@
     <bpmn:sequenceFlow id="SequenceFlow_05nscxi" sourceRef="Task_0ykk86k" targetRef="Task_0lkp32v" />
     <bpmn:sequenceFlow id="SequenceFlow_0kq7hg7" sourceRef="Task_160enre" targetRef="Task_0ykk86k" />
     <bpmn:sequenceFlow id="SequenceFlow_0lv64mp" sourceRef="Task_1psmrxu" targetRef="Task_160enre" />
-    <bpmn:sequenceFlow id="SequenceFlow_1xo24sq" sourceRef="ServiceTask_1srv8mj" targetRef="BusinessRuleTask_1wnlaxi" />
-    <bpmn:sequenceFlow id="SequenceFlow_1fv4tys" sourceRef="BusinessRuleTask_1wnlaxi" targetRef="UserTask_059pb4t" />
+    <bpmn:sequenceFlow id="SequenceFlow_1xo24sq" sourceRef="ServiceTask_1srv8mj" targetRef="ServiceTask_1rraefl" />
     <bpmn:sequenceFlow id="SequenceFlow_0uiixca" sourceRef="Task_1x8u4v6" targetRef="ServiceTask_1rraefl" />
     <bpmn:sequenceFlow id="SequenceFlow_1yix84q" sourceRef="StartEvent_1y5a1kx" targetRef="Task_1x8u4v6" />
-    <bpmn:serviceTask id="ServiceTask_1rraefl" name="ServiceClient" camunda:class="ServiceClient">
-      <bpmn:incoming>SequenceFlow_0uiixca</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_19vheyx</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:userTask id="Task_1x8u4v6" name="Calculate &#34;Client Ranking&#34; for Salesman">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -90,6 +74,60 @@
       <bpmn:incoming>SequenceFlow_1yix84q</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0uiixca</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:serviceTask id="ServiceTask_1rraefl" name="ServiceClient" camunda:class="ServiceClient">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="firstName" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0uiixca</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1xo24sq</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_19vheyx</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0v8h806</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1fv4tys" sourceRef="BusinessRuleTask_1wnlaxi" targetRef="SubProcess_0k72z16" />
+    <bpmn:sequenceFlow id="SequenceFlow_0v8h806" sourceRef="ServiceTask_1rraefl" targetRef="BusinessRuleTask_1wnlaxi" />
+    <bpmn:businessRuleTask id="BusinessRuleTask_1wnlaxi" name="BonusCalculation" camunda:resultVariable="dmn_output" camunda:decisionRef="Decision_1eogn71" camunda:mapDecisionResult="singleResult">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="end">
+          <camunda:script scriptFormat="javascript">var combinedResult = execution.getVariable("combinedResult");
+var dmn_output = execution.getVariable("dmn_output")["bonus"];
+
+combinedResult.prop("values").append(dmn_output)
+
+execution.setVariable("combinedResult", combinedResult)</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0v8h806</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1fv4tys</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics camunda:collection="${clientCollection.prop(&#34;clientCollection&#34;).elements()}" camunda:elementVariable="client" />
+    </bpmn:businessRuleTask>
+    <bpmn:task id="Task_1psmrxu" name="Send calculated data to &#34;Data Collector&#34;">
+      <bpmn:incoming>SequenceFlow_1whv2ep</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0lv64mp</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:userTask id="UserTask_059pb4t" name="CEO Reflects all boni">
+      <bpmn:incoming>SequenceFlow_0gvibvj</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1whv2ep</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:subProcess id="SubProcess_0k72z16">
+      <bpmn:incoming>SequenceFlow_1fv4tys</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0gvibvj</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics camunda:collection="${combinedResult.prop(&#34;values&#34;).elements()}" camunda:elementVariable="client" />
+      <bpmn:startEvent id="StartEvent_0dctqbv">
+        <bpmn:outgoing>SequenceFlow_1obo3qh</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:endEvent id="EndEvent_162fws5">
+        <bpmn:incoming>SequenceFlow_1mbv6w5</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:userTask id="UserTask_0i4vt7a" name="Salesman ${boni}" camunda:assignee="demo">
+        <bpmn:incoming>SequenceFlow_1obo3qh</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_1mbv6w5</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:sequenceFlow id="SequenceFlow_1mbv6w5" sourceRef="UserTask_0i4vt7a" targetRef="EndEvent_162fws5" />
+      <bpmn:sequenceFlow id="SequenceFlow_1obo3qh" sourceRef="StartEvent_0dctqbv" targetRef="UserTask_0i4vt7a" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="SequenceFlow_0gvibvj" sourceRef="SubProcess_0k72z16" targetRef="UserTask_059pb4t" />
     <bpmn:textAnnotation id="TextAnnotation_1h2rjb5">
       <bpmn:text>Implement in Microservice</bpmn:text>
     </bpmn:textAnnotation>
@@ -98,7 +136,7 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_04jwzxq">
       <bpmndi:BPMNShape id="Participant_1ywuare_di" bpmnElement="Participant_1ywuare" isHorizontal="true">
-        <dc:Bounds x="150" y="80" width="2033" height="480" />
+        <dc:Bounds x="150" y="80" width="2033" height="641" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_0fymlff_di" bpmnElement="EndEvent_0fymlff">
         <dc:Bounds x="1957" y="192" width="36" height="36" />
@@ -119,10 +157,10 @@
         <dc:Bounds x="232" y="406" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_059pb4t_di" bpmnElement="UserTask_059pb4t">
-        <dc:Bounds x="1235" y="386" width="100" height="80" />
+        <dc:Bounds x="1311" y="386" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_1psmrxu_di" bpmnElement="Task_1psmrxu">
-        <dc:Bounds x="1425" y="386" width="100" height="80" />
+        <dc:Bounds x="1487" y="384" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_0lkp32v_di" bpmnElement="Task_0lkp32v">
         <dc:Bounds x="1785" y="170" width="100" height="80" />
@@ -134,9 +172,7 @@
         <dc:Bounds x="1465" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_19vheyx_di" bpmnElement="SequenceFlow_19vheyx">
-        <di:waypoint x="620" y="380" />
-        <di:waypoint x="620" y="315" />
-        <di:waypoint x="615" y="315" />
+        <di:waypoint x="615" y="384" />
         <di:waypoint x="615" y="250" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1dq8h8n_di" bpmnElement="SequenceFlow_1dq8h8n">
@@ -148,8 +184,10 @@
         <di:waypoint x="965" y="210" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1whv2ep_di" bpmnElement="SequenceFlow_1whv2ep">
-        <di:waypoint x="1335" y="426" />
-        <di:waypoint x="1425" y="426" />
+        <di:waypoint x="1411" y="426" />
+        <di:waypoint x="1449" y="426" />
+        <di:waypoint x="1449" y="424" />
+        <di:waypoint x="1487" y="424" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1ovc355_di" bpmnElement="SequenceFlow_1ovc355">
         <di:waypoint x="1885" y="210" />
@@ -164,29 +202,26 @@
         <di:waypoint x="1625" y="210" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0lv64mp_di" bpmnElement="SequenceFlow_0lv64mp">
-        <di:waypoint x="1475" y="386" />
+        <di:waypoint x="1537" y="384" />
+        <di:waypoint x="1537" y="317" />
+        <di:waypoint x="1475" y="317" />
         <di:waypoint x="1475" y="250" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1xo24sq_di" bpmnElement="SequenceFlow_1xo24sq">
-        <di:waypoint x="1015" y="250" />
-        <di:waypoint x="1015" y="384" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1fv4tys_di" bpmnElement="SequenceFlow_1fv4tys">
-        <di:waypoint x="1065" y="424" />
-        <di:waypoint x="1235" y="424" />
+        <di:waypoint x="970" y="249" />
+        <di:waypoint x="815" y="399" />
+        <di:waypoint x="665" y="399" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0uiixca_di" bpmnElement="SequenceFlow_0uiixca">
         <di:waypoint x="420" y="424" />
-        <di:waypoint x="500" y="424" />
-        <di:waypoint x="500" y="420" />
-        <di:waypoint x="570" y="420" />
+        <di:waypoint x="565" y="424" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1yix84q_di" bpmnElement="SequenceFlow_1yix84q">
         <di:waypoint x="268" y="424" />
         <di:waypoint x="320" y="424" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Lane_0qnl8s7_di" bpmnElement="Lane_0qnl8s7" isHorizontal="true">
-        <dc:Bounds x="180" y="350" width="2003" height="210" />
+        <dc:Bounds x="180" y="350" width="2003" height="371" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_1lv69z1_di" bpmnElement="Lane_1lv69z1" isHorizontal="true">
         <dc:Bounds x="180" y="80" width="2003" height="270" />
@@ -199,11 +234,45 @@
         <di:waypoint x="1599" y="130" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_0odni3i_di" bpmnElement="ServiceTask_1rraefl">
-        <dc:Bounds x="570" y="380" width="100" height="80" />
+        <dc:Bounds x="565" y="384" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_16wtlng_di" bpmnElement="Task_1x8u4v6">
         <dc:Bounds x="320" y="384" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fv4tys_di" bpmnElement="SequenceFlow_1fv4tys">
+        <di:waypoint x="1065" y="448" />
+        <di:waypoint x="1177" y="501" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0v8h806_di" bpmnElement="SequenceFlow_0v8h806">
+        <di:waypoint x="665" y="424" />
+        <di:waypoint x="965" y="424" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="SubProcess_0k72z16_di" bpmnElement="SubProcess_0k72z16" isExpanded="true">
+        <dc:Bounds x="1049" y="502" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_0dctqbv_di" bpmnElement="StartEvent_0dctqbv">
+        <dc:Bounds x="1069" y="579" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_162fws5_di" bpmnElement="EndEvent_162fws5">
+        <dc:Bounds x="1303" y="579" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0i4vt7a_di" bpmnElement="UserTask_0i4vt7a">
+        <dc:Bounds x="1151" y="557" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1mbv6w5_di" bpmnElement="SequenceFlow_1mbv6w5">
+        <di:waypoint x="1251" y="597" />
+        <di:waypoint x="1303" y="597" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1obo3qh_di" bpmnElement="SequenceFlow_1obo3qh">
+        <di:waypoint x="1105" y="597" />
+        <di:waypoint x="1151" y="597" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0gvibvj_di" bpmnElement="SequenceFlow_0gvibvj">
+        <di:waypoint x="1224" y="502" />
+        <di:waypoint x="1224" y="484" />
+        <di:waypoint x="1361" y="484" />
+        <di:waypoint x="1361" y="466" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
