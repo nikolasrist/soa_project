@@ -10,9 +10,9 @@
         <bpmn:flowNodeRef>StartEvent_1y5a1kx</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1x8u4v6</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ServiceTask_1rraefl</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_1psmrxu</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>UserTask_059pb4t</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>SubProcess_0k72z16</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1psmrxu</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1lv69z1" name="Data Collector">
         <bpmn:flowNodeRef>EndEvent_0fymlff</bpmn:flowNodeRef>
@@ -102,10 +102,6 @@ execution.setVariable("combinedResult", combinedResult)</camunda:script>
       <bpmn:outgoing>SequenceFlow_1fv4tys</bpmn:outgoing>
       <bpmn:multiInstanceLoopCharacteristics camunda:collection="${clientCollection.prop(&#34;clientCollection&#34;).elements()}" camunda:elementVariable="client" />
     </bpmn:businessRuleTask>
-    <bpmn:task id="Task_1psmrxu" name="Send calculated data to &#34;Data Collector&#34;">
-      <bpmn:incoming>SequenceFlow_1whv2ep</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0lv64mp</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:userTask id="UserTask_059pb4t" name="CEO Reflects all boni">
       <bpmn:incoming>SequenceFlow_0gvibvj</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1whv2ep</bpmn:outgoing>
@@ -113,7 +109,7 @@ execution.setVariable("combinedResult", combinedResult)</camunda:script>
     <bpmn:subProcess id="SubProcess_0k72z16">
       <bpmn:incoming>SequenceFlow_1fv4tys</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0gvibvj</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics camunda:collection="${combinedResult.prop(&#34;values&#34;).elements()}" camunda:elementVariable="client" />
+      <bpmn:multiInstanceLoopCharacteristics camunda:collection="${combinedResult.prop(&#34;values&#34;).elements()}" camunda:elementVariable="boni" />
       <bpmn:startEvent id="StartEvent_0dctqbv">
         <bpmn:outgoing>SequenceFlow_1obo3qh</bpmn:outgoing>
       </bpmn:startEvent>
@@ -128,6 +124,10 @@ execution.setVariable("combinedResult", combinedResult)</camunda:script>
       <bpmn:sequenceFlow id="SequenceFlow_1obo3qh" sourceRef="StartEvent_0dctqbv" targetRef="UserTask_0i4vt7a" />
     </bpmn:subProcess>
     <bpmn:sequenceFlow id="SequenceFlow_0gvibvj" sourceRef="SubProcess_0k72z16" targetRef="UserTask_059pb4t" />
+    <bpmn:task id="Task_1psmrxu" name="Send calculated data to &#34;Data Collector&#34;">
+      <bpmn:incoming>SequenceFlow_1whv2ep</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0lv64mp</bpmn:outgoing>
+    </bpmn:task>
     <bpmn:textAnnotation id="TextAnnotation_1h2rjb5">
       <bpmn:text>Implement in Microservice</bpmn:text>
     </bpmn:textAnnotation>
@@ -160,7 +160,7 @@ execution.setVariable("combinedResult", combinedResult)</camunda:script>
         <dc:Bounds x="1311" y="386" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_1psmrxu_di" bpmnElement="Task_1psmrxu">
-        <dc:Bounds x="1487" y="384" width="100" height="80" />
+        <dc:Bounds x="1487" y="386" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_0lkp32v_di" bpmnElement="Task_0lkp32v">
         <dc:Bounds x="1785" y="170" width="100" height="80" />
@@ -185,9 +185,7 @@ execution.setVariable("combinedResult", combinedResult)</camunda:script>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1whv2ep_di" bpmnElement="SequenceFlow_1whv2ep">
         <di:waypoint x="1411" y="426" />
-        <di:waypoint x="1449" y="426" />
-        <di:waypoint x="1449" y="424" />
-        <di:waypoint x="1487" y="424" />
+        <di:waypoint x="1487" y="426" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1ovc355_di" bpmnElement="SequenceFlow_1ovc355">
         <di:waypoint x="1885" y="210" />
@@ -202,7 +200,7 @@ execution.setVariable("combinedResult", combinedResult)</camunda:script>
         <di:waypoint x="1625" y="210" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0lv64mp_di" bpmnElement="SequenceFlow_0lv64mp">
-        <di:waypoint x="1537" y="384" />
+        <di:waypoint x="1537" y="386" />
         <di:waypoint x="1537" y="317" />
         <di:waypoint x="1475" y="317" />
         <di:waypoint x="1475" y="250" />
