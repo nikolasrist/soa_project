@@ -8,9 +8,10 @@ import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.value.ObjectValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static org.camunda.spin.Spin.JSON;
 
 public class ServiceClient implements JavaDelegate {
 
@@ -27,7 +28,10 @@ public class ServiceClient implements JavaDelegate {
 //        Salesman salesman = mapSalesmanResponse(response);
 //        System.out.println(salesman);
         ClientInfoDTO clientInfo = mapClientInfoDTOResponse(response);
-        execution.setVariable("clientCollection", JSON(clientInfo.getSalesInfo()).toString());
+        ObjectValue typedSalesInfoListObject =
+            Variables.objectValue(clientInfo.getSalesInfo()).serializationDataFormat("application/json").create();
+
+        execution.setVariable("clientCollection", typedSalesInfoListObject);
         System.out.println(clientInfo);
     }
 
