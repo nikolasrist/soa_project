@@ -1,6 +1,6 @@
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class SalesInfoDTO {
     private String productName;
     private String clientName;
