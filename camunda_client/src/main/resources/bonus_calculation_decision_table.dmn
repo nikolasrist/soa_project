@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_00aee79" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.1.0">
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_00aee79" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.3.2">
   <decision id="Decision_1eogn71" name="BonusCalculation">
     <extensionElements>
       <biodi:bounds x="792" y="225" width="180" height="80" />
     </extensionElements>
     <decisionTable id="decisionTable_1" hitPolicy="COLLECT">
-      <input id="input_1" label="product" camunda:inputVariable="product">
-        <inputExpression id="inputExpression_1" typeRef="string">
-          <text></text>
+      <input id="input_1" label="product" camunda:inputVariable="client">
+        <inputExpression id="inputExpression_1" typeRef="string" expressionLanguage="JavaScript">
+          <text>client.productName</text>
         </inputExpression>
       </input>
       <input id="InputClause_0o5ytvd" label="client" camunda:inputVariable="client">
-        <inputExpression id="LiteralExpression_1e434gy" typeRef="string">
-          <text>client.value()</text>
+        <inputExpression id="LiteralExpression_1e434gy" typeRef="string" expressionLanguage="JavaScript">
+          <text>client.clientName</text>
         </inputExpression>
       </input>
-      <input id="InputClause_1fsxftz" label="client-ranking" camunda:inputVariable="clientRanking">
-        <inputExpression id="LiteralExpression_148v3di" typeRef="integer">
-          <text></text>
+      <input id="InputClause_1fsxftz" label="client-ranking" camunda:inputVariable="client">
+        <inputExpression id="LiteralExpression_148v3di" typeRef="integer" expressionLanguage="JavaScript">
+          <text>client.clientRanking</text>
         </inputExpression>
       </input>
-      <input id="InputClause_0gtj6dc" label="items" camunda:inputVariable="items">
-        <inputExpression id="LiteralExpression_0uj8fo6" typeRef="integer">
+      <input id="InputClause_0gtj6dc" label="items" camunda:inputVariable="client">
+        <inputExpression id="LiteralExpression_0uj8fo6" typeRef="integer" expressionLanguage="JavaScript">
+          <text>client.quantity</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0spmx0c">
+        <inputExpression id="LiteralExpression_1268qca" typeRef="string">
           <text></text>
         </inputExpression>
       </input>
@@ -37,7 +42,10 @@
           <text>A</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0jpkbtr">
-          <text>&gt;= 20 </text>
+          <text>&gt;= 20</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_107ptuv">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1pe1wc0">
           <text>700</text>
@@ -56,6 +64,9 @@
         <inputEntry id="UnaryTests_0j7zsof">
           <text>&lt; 20</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1ulxid4">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0zwm5kj">
           <text>600</text>
         </outputEntry>
@@ -72,6 +83,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_0zv6i37">
           <text>&gt;= 20</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14atpy0">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_035mph0">
           <text>500</text>
@@ -90,6 +104,9 @@
         <inputEntry id="UnaryTests_06o60ax">
           <text>&lt; 20</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0a6ob27">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0x61bpn">
           <text>400</text>
         </outputEntry>
@@ -106,6 +123,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_1y21ygz">
           <text>&gt;= 20</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dknbpr">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1std2lp">
           <text>300</text>
@@ -124,6 +144,9 @@
         <inputEntry id="UnaryTests_1c26l1i">
           <text>&lt; 20</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0j38u1h">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_1m8pea8">
           <text>200</text>
         </outputEntry>
@@ -139,7 +162,10 @@
           <text>A</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0s57po2">
-          <text>&gt;= 20 </text>
+          <text>&gt;= 20</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04kn5tq">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_04h15uy">
           <text>700</text>
@@ -158,6 +184,9 @@
         <inputEntry id="UnaryTests_1545wra">
           <text>&lt; 20</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0ri4ncn">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_1rm1iyy">
           <text>600</text>
         </outputEntry>
@@ -173,7 +202,10 @@
           <text>B</text>
         </inputEntry>
         <inputEntry id="UnaryTests_01mtyp5">
-          <text>&gt;= 20 </text>
+          <text>&gt;= 20</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0d1zxau">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_09l27ep">
           <text>500</text>
@@ -192,6 +224,9 @@
         <inputEntry id="UnaryTests_14dosfh">
           <text>&lt; 20</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0b8i5d2">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_01l9smx">
           <text>400</text>
         </outputEntry>
@@ -209,6 +244,9 @@
         <inputEntry id="UnaryTests_18zj66s">
           <text>&gt;= 30</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0btwziv">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_122lkxm">
           <text>300</text>
         </outputEntry>
@@ -225,6 +263,9 @@
         </inputEntry>
         <inputEntry id="UnaryTests_1ffkter">
           <text>&lt; 30</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0fy1zxs">
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0f38qeo">
           <text>200</text>

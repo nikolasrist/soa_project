@@ -26,6 +26,7 @@ public class ServiceClient implements JavaDelegate {
 //        Salesman salesman = mapSalesmanResponse(response);
 //        System.out.println(salesman);
         ClientInfoDTO clientInfo = mapClientInfoDTOResponse(response);
+        execution.setVariable("clientCollection", clientInfo.getSalesInfo());
         System.out.println(clientInfo);
     }
 
