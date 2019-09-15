@@ -94,6 +94,13 @@
       <bpmn:outgoing>SequenceFlow_1whv2ep</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:subProcess id="SubProcess_0k72z16">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="dmn_output">
+            <camunda:map />
+          </camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1fv4tys</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0gvibvj</bpmn:outgoing>
       <bpmn:multiInstanceLoopCharacteristics camunda:collection="${combinedResult.prop(&#34;values&#34;).elements()}" camunda:elementVariable="boni" />
@@ -104,6 +111,13 @@
         <bpmn:incoming>SequenceFlow_1mbv6w5</bpmn:incoming>
       </bpmn:endEvent>
       <bpmn:userTask id="UserTask_0i4vt7a" name="Salesman ${boni}" camunda:assignee="demo">
+        <bpmn:extensionElements>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="dmn_output">
+              <camunda:map />
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+        </bpmn:extensionElements>
         <bpmn:incoming>SequenceFlow_1obo3qh</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_1mbv6w5</bpmn:outgoing>
       </bpmn:userTask>
