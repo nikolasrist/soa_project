@@ -3,22 +3,22 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClientInfoDTO {
-    private String clientName;
-    private List<SalesInfoDTO> salesInfo;
+    private String salesmanName;
+    private List<SalesInfoDTO> salesInfos;
 
     public String getClientName() {
-        return clientName;
+        return salesmanName;
     }
 
     public List<SalesInfoDTO> getSalesInfo() {
-        return salesInfo;
+        return salesInfos;
     }
 
     @Override
     public String toString() {
         return "ClientInfoDTO{" +
-            "clientName='" + clientName + '\'' +
-            ", salesInfo=" + salesInfo +
+            "clientName='" + salesmanName + '\'' +
+            ", salesInfo=" + salesInfos +
             '}';
     }
 }

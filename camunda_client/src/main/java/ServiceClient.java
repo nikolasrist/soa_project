@@ -43,7 +43,7 @@ public class ServiceClient implements JavaDelegate {
         HttpRequestFactory requestFactory
                 = new NetHttpTransport().createRequestFactory();
         HttpRequest request = requestFactory.buildGetRequest(
-                new GenericUrl("http://192.168.2.169:9050/salesman/"+name.trim().replace(" ", "%20")+"/bonusInfo"));
+                new GenericUrl("http://192.168.2.172:9050/salesman/"+name.trim().replace(" ", "%20")+"/bonusInfo"));
         String rawResponse = request.execute().parseAsString();
         return rawResponse;
     }
