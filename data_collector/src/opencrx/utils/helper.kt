@@ -29,6 +29,12 @@ fun printAccount(account: Account) {
     println("-------------------")
 }
 
+fun printProduct(product: Product) {
+    println("Name: ${product.name}" )
+    println("ProductNumber: ${product.productNumber}" )
+    println("-------------------")
+}
+
 fun printContractList(contractList: ContractList) {
     for (contract in contractList.objects) {
         printContract(contract)

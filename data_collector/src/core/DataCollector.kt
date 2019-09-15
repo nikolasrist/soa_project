@@ -10,6 +10,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.jackson.jackson
 import io.ktor.response.*
 import io.ktor.server.engine.*
+import opencrx.collectSalesManInformation
 import orangeHRM.OrangeHRMClient
 import orangeHRM.models.Employee
 import orangeHRM.models.EmployeeListResponse
@@ -39,6 +40,10 @@ fun main(args: Array<String>) {
                 get("salesman/{name}") {
                     val name = call.parameters["name"]
                     call.respond(getSalesman(name!!))
+                }
+                get("salesman/{name}/bonusInfo") {
+                    val name = call.parameters["name"]
+                    call.respond(collectSalesManInformation(name!!))
                 }
             }
         }

@@ -11,7 +11,7 @@ class ServiceClientTest {
                 "  \"employeeId\": \"7\",\n" +
                 "  \"jobTitle\": \"Senior Salesman\"\n" +
                 "}";
-        Salesman salesman = ServiceClient.mapResponse(response);
+        Salesman salesman = ServiceClient.mapSalesmanResponse(response);
         assertEquals("John", salesman.getFirstName());
         assertEquals("Smith", salesman.getLastName());
         assertEquals("Senior Salesman", salesman.getJobTitle());

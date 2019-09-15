@@ -36,6 +36,14 @@ suspend fun getAccount(id: String): Response {
     return ErrorResponse("Failed to retrieve account: $id", accountResponse.status)
 }
 
+suspend fun getAccountByUrl(url: String): Response {
+    val accountResponse = client.get<HttpResponse>(url)
+    if (accountResponse.status == HttpStatusCode.OK) {
+        return AccountResponse(accountResponse.receive())
+    }
+    return ErrorResponse("Failed to retrieve account: $url", accountResponse.status)
+}
+
 suspend fun getAssignedContract(assignedContractsUrl: String): Response {
     val contractListResponse = client.get<HttpResponse>("$assignedContractsUrl/assignedContract")
     if (contractListResponse.status == HttpStatusCode.OK) {
@@ -43,12 +51,21 @@ suspend fun getAssignedContract(assignedContractsUrl: String): Response {
     }
     return ErrorResponse("Failed to retrieve assigned contract list.", contractListResponse.status)
 }
+
 suspend fun getSalesOrderPosition(salesOrderUrl: String): Response {
     val salesOrderPositionListResponse = client.get<HttpResponse>("$salesOrderUrl/position")
     if (salesOrderPositionListResponse.status == HttpStatusCode.OK) {
         return SalesOrderPositionListResponse(salesOrderPositionListResponse.receive())
     }
     return ErrorResponse("Failed to retrieve sales order position list.", salesOrderPositionListResponse.status)
+}
+
+suspend fun getProduct(productUrl: String): Response {
+    val productResponse = client.get<HttpResponse>("$productUrl")
+    if (productResponse.status == HttpStatusCode.OK){
+        return ProductResponse(productResponse.receive())
+    }
+    return ErrorResponse("Failed to retrieve product information.", productResponse.status)
 }
 
 suspend fun getAllAccounts(): Response {

@@ -6,13 +6,13 @@
     </extensionElements>
     <decisionTable id="decisionTable_1" hitPolicy="COLLECT">
       <input id="input_1" label="product" camunda:inputVariable="product">
-        <inputExpression id="inputExpression_1" typeRef="string" expressionLanguage="FEEL">
+        <inputExpression id="inputExpression_1" typeRef="string">
           <text></text>
         </inputExpression>
       </input>
       <input id="InputClause_0o5ytvd" label="client" camunda:inputVariable="client">
         <inputExpression id="LiteralExpression_1e434gy" typeRef="string">
-          <text></text>
+          <text>client.value()</text>
         </inputExpression>
       </input>
       <input id="InputClause_1fsxftz" label="client-ranking" camunda:inputVariable="clientRanking">

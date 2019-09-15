@@ -1,2 +1,5 @@
-ServiceClient.class
+SalesInfoDTO.class
 CamundaClient.class
+Salesman.class
+ServiceClient.class
+ClientInfoDTO.class

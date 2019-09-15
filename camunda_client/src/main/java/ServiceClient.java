@@ -23,21 +23,27 @@ public class ServiceClient implements JavaDelegate {
         String salesmanName = (String) execution.getVariable("NameField");
         LOG.info("Salesman chosen: {}", salesmanName);
         String response = callEndpoint(salesmanName);
-        Salesman salesman = mapResponse(response);
-        System.out.println(salesman);
+//        Salesman salesman = mapSalesmanResponse(response);
+//        System.out.println(salesman);
+        ClientInfoDTO clientInfo = mapClientInfoDTOResponse(response);
+        System.out.println(clientInfo);
     }
 
-    static Salesman mapResponse(String response) throws IOException {
+    static Salesman mapSalesmanResponse(String response) throws IOException {
         ObjectMapper oMapper = new ObjectMapper();
         return oMapper.readValue(response, Salesman.class);
     }
 
+    static ClientInfoDTO mapClientInfoDTOResponse(String response) throws IOException {
+        ObjectMapper oMapper = new ObjectMapper();
+        return oMapper.readValue(response, ClientInfoDTO.class);
+    }
 
     public static String callEndpoint(String name) throws IOException {
         HttpRequestFactory requestFactory
                 = new NetHttpTransport().createRequestFactory();
         HttpRequest request = requestFactory.buildGetRequest(
-                new GenericUrl("http://192.168.2.169:9050/salesman/"+name.trim().replace(" ", "%20")));
+                new GenericUrl("http://192.168.2.169:9050/salesman/"+name.trim().replace(" ", "%20")+"/bonusInfo"));
         String rawResponse = request.execute().parseAsString();
         return rawResponse;
     }

@@ -45,8 +45,15 @@ data class ErrorResponse(
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 data class AssignedContract(
     @JsonProperty("@type") val type: String? = "",
-    @JsonProperty("@href") val salesOrderUrl: String? = ""
+    @JsonProperty("@href") val salesOrderUrl: String? = "",
+    val customer: Customer
     )
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+data class Customer(
+    @JsonProperty("@href") val customerUrl: String? = ""
+)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ContractList(
@@ -60,8 +67,24 @@ data class ContractListResponse(
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 data class SalesOrderPosition(
     val baseAmount: String,
-    val quantity: String
+    val quantity: String,
+    val product: Product
+
 )
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+data class Product(
+    @JsonProperty("@href") val reference: String? = "",
+    val name: String? = "",
+    val productNumber: Int? = 0
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+data class ProductResponse(
+    val data: Product
+) : Response()
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class SalesOrderPositionList(
@@ -71,3 +94,14 @@ data class SalesOrderPositionListResponse(
     val data: SalesOrderPositionList
 ) : Response()
 
+data class ClientInfoDTO(
+    var salesmanName: String = "",
+    var salesInfos: ArrayList<SalesInfoDTO> = ArrayList()
+)
+
+data class SalesInfoDTO(
+    var productName: String = "",
+    var clientName: String = "",
+    var clientRanking: String = "",
+    var quantity: String = ""
+)
