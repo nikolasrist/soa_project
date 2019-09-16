@@ -26,10 +26,10 @@ public class SalesInfoDTO {
     @Override
     public String toString() {
         return "SalesInfoDTO{" +
-            "productName='" + productName + '\'' +
-            ", clientName='" + clientName + '\'' +
-            ", clientRanking='" + clientRanking + '\'' +
-            ", quantity='" + quantity + '\'' +
-            '}';
+                "productName='" + productName + '\'' +
+                ", clientName='" + clientName + '\'' +
+                ", clientRanking=" + clientRanking +
+                ", quantity=" + quantity +
+                '}';
     }
 }
