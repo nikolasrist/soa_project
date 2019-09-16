@@ -39,7 +39,7 @@ suspend fun collectSalesManInformation(salesManName: String): ClientInfoDTO {
                 salesInfoDTO.clientName = account.fullName.toString()
                 salesInfoDTO.clientRanking = account.accountRating.toString().toInt()
                 salesInfoDTO.productName = productInformation.name.toString()
-                salesInfoDTO.quantity = position.quantity.toInt()
+                salesInfoDTO.quantity = position.quantity.toDouble()
                 clientInfoDTO.salesInfos.add(salesInfoDTO)
             }
         }
