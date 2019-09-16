@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class SalesInfoDTO {
     private String productName;
     private String clientName;
-    private String clientRanking;
-    private String quantity;
+    private int clientRanking;
+    private double quantity;
 
     public String getProductName() {
         return productName;
@@ -15,11 +15,11 @@ public class SalesInfoDTO {
         return clientName;
     }
 
-    public String getClientRanking() {
+    public int getClientRanking() {
         return clientRanking;
     }
 
-    public String getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
