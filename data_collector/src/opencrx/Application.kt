@@ -37,9 +37,9 @@ suspend fun collectSalesManInformation(salesManName: String): ClientInfoDTO {
                 val productInformation = retrieveProductInformation(position)
                 val salesInfoDTO = SalesInfoDTO()
                 salesInfoDTO.clientName = account.fullName.toString()
-                salesInfoDTO.clientRanking = account.accountRating.toString()
+                salesInfoDTO.clientRanking = account.accountRating.toString().toInt()
                 salesInfoDTO.productName = productInformation.name.toString()
-                salesInfoDTO.quantity = position.quantity
+                salesInfoDTO.quantity = position.quantity.toInt()
                 clientInfoDTO.salesInfos.add(salesInfoDTO)
             }
         }

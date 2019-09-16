@@ -102,6 +102,6 @@ data class ClientInfoDTO(
 data class SalesInfoDTO(
     var productName: String = "",
     var clientName: String = "",
-    var clientRanking: String = "",
-    var quantity: String = ""
+    var clientRanking: Int = 0,
+    var quantity: Int = 0
 )
