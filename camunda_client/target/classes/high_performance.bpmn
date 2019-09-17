@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0alxcwu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.1.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0alxcwu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.2">
   <bpmn:collaboration id="Collaboration_04jwzxq">
     <bpmn:participant id="Participant_1ywuare" name="HighPerformance" processRef="Process_0k6k520" />
   </bpmn:collaboration>
@@ -88,10 +88,19 @@ execution.setVariable("combinedResult", jsonValue)</bpmn:script>
         <camunda:executionListener event="end">
           <camunda:script scriptFormat="javascript">var combinedResult = execution.getVariable("combinedResult");
 var dmn_output = execution.getVariable("dmn_output");
+var client = execution.getVariable("client");
+
 if (dmn_output){
-var bonus_val = dmn_output["bonus"];
-combinedResult.prop("values").append(dmn_output);
-execution.setVariable("combinedResult", combinedResult);
+   var bonus_val = dmn_output.bonus;
+   var completeResult = {
+       productName: client.productName,
+       clientName: client.clientName,
+       clientRanking: client.clientRanking,
+       quantity: client.quantity,
+       bonus: bonus_val
+}
+   combinedResult.prop("values").append(completeResult);
+   execution.setVariable("combinedResult", combinedResult);
 }</camunda:script>
         </camunda:executionListener>
       </bpmn:extensionElements>
