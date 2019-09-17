@@ -44,11 +44,11 @@ public class DataSender implements JavaDelegate {
             new GenericUrl("http://data-collector:9050/salesman/" + name.trim().replace(" ", "%20") + "/bonusInfo"),
             jsonHttpContent);
 
-        HttpResponse respons = request.execute();
-        if (respons.isSuccessStatusCode()) {
-            return respons.parseAsString();
+        HttpResponse response = request.execute();
+        if (response.isSuccessStatusCode()) {
+            return response.parseAsString();
         } else {
-            throw new HttpResponseException(respons);
+            throw new HttpResponseException(response);
         }
     }
 }
