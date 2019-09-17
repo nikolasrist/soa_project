@@ -1,33 +1,34 @@
 package core
 
-import io.ktor.server.netty.*
-import io.ktor.routing.*
-import io.ktor.application.*
+import io.ktor.application.call
+import io.ktor.application.install
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.NotFoundException
 import io.ktor.features.StatusPages
 import io.ktor.http.HttpStatusCode
 import io.ktor.jackson.jackson
-import io.ktor.request.document
 import io.ktor.request.receive
-import io.ktor.request.receiveText
-import io.ktor.response.*
-import io.ktor.server.engine.*
+import io.ktor.response.respond
+import io.ktor.routing.get
+import io.ktor.routing.put
+import io.ktor.routing.route
+import io.ktor.routing.routing
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
 import opencrx.collectSalesManInformation
 import opencrx.models.ClientInfoDTO
 import orangeHRM.OrangeHRMClient
 import orangeHRM.models.Employee
 import orangeHRM.models.EmployeeListResponse
 import orangeHRM.models.ErrorResponse
-import orangeHRM.utils.printEmployee
 import orangeHRM.utils.printError
 import org.slf4j.event.Level
 
 fun main(args: Array<String>) {
     embeddedServer(Netty, 9050) {
-        install(ContentNegotiation){
-            jackson{}
+        install(ContentNegotiation) {
+            jackson {}
         }
         install(CallLogging) {
             level = Level.DEBUG
@@ -66,7 +67,7 @@ fun main(args: Array<String>) {
     }.start(wait = true)
 }
 
-suspend fun updateSalesman(clientInfoDTO: ClientInfoDTO) : HttpStatusCode {
+suspend fun updateSalesman(clientInfoDTO: ClientInfoDTO): HttpStatusCode {
     val oHRMClient = OrangeHRMClient()
     oHRMClient.setToken()
     //todo implement if needed
@@ -88,7 +89,7 @@ suspend fun getSalesmen(): List<Employee> {
     }
 }
 
-suspend fun getSalesman (employeeName: String): Employee {
+suspend fun getSalesman(employeeName: String): Employee {
     val oHRMClient = OrangeHRMClient()
     oHRMClient.setToken()
     return when (val employeeResponse = oHRMClient.getEmployee(employeeName)) {
