@@ -69,9 +69,7 @@ fun main(args: Array<String>) {
 suspend fun updateSalesman(clientInfoDTO: ClientInfoDTO) : HttpStatusCode {
     val oHRMClient = OrangeHRMClient()
     oHRMClient.setToken()
-
-
-
+    //todo implement if needed
     return HttpStatusCode.OK
 }
 

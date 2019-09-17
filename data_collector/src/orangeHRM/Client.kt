@@ -66,10 +66,6 @@ class OrangeHRMClient {
         return EmployeeListResponse(httpResponse.receive())
     }
 
-    suspend fun updateEmployee () : Response {
-        val httpResponse = client.put<HttpResponse>()
-    }
-
     suspend fun getAllAccounts(): Response {
         val httpResponse = client.get<HttpResponse>("$baseUrl$apiBaseUrl$userApi")
         if (httpResponse.status != HttpStatusCode.OK) {
