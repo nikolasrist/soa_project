@@ -99,9 +99,11 @@ data class ClientInfoDTO(
     var salesInfos: ArrayList<SalesInfoDTO> = ArrayList()
 )
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class SalesInfoDTO(
     var productName: String = "",
     var clientName: String = "",
     var clientRanking: Int = 0,
-    var quantity: Double = 0.0
+    var quantity: Double = 0.0,
+    var bonus: Int = 0
 )

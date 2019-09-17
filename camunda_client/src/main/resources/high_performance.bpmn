@@ -12,7 +12,6 @@
         <bpmn:flowNodeRef>Task_14o8gfi</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>BusinessRuleTask_1wnlaxi</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>SubProcess_0k72z16</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>UserTask_059pb4t</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1psmrxu</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1lv69z1" name="Data Collector">
@@ -131,20 +130,15 @@ if (dmn_output){
       <bpmn:sequenceFlow id="SequenceFlow_1mbv6w5" sourceRef="UserTask_0i4vt7a" targetRef="EndEvent_162fws5" />
       <bpmn:sequenceFlow id="SequenceFlow_1obo3qh" sourceRef="StartEvent_0dctqbv" targetRef="UserTask_0i4vt7a" />
     </bpmn:subProcess>
-    <bpmn:userTask id="UserTask_059pb4t" name="CEO Reflects all boni">
-      <bpmn:incoming>SequenceFlow_1fhirz2</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1whv2ep</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:task id="Task_1psmrxu" name="Send calculated data to &#34;Data Collector&#34;">
-      <bpmn:incoming>SequenceFlow_1whv2ep</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0lv64mp</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_1yix84q" sourceRef="StartEvent_1y5a1kx" targetRef="Task_1x8u4v6" />
     <bpmn:sequenceFlow id="SequenceFlow_0uiixca" sourceRef="Task_1x8u4v6" targetRef="ServiceTask_1rraefl" />
     <bpmn:sequenceFlow id="SequenceFlow_0lel8op" sourceRef="Task_14o8gfi" targetRef="BusinessRuleTask_1wnlaxi" />
     <bpmn:sequenceFlow id="SequenceFlow_0qj6sky" sourceRef="BusinessRuleTask_1wnlaxi" targetRef="SubProcess_0k72z16" />
-    <bpmn:sequenceFlow id="SequenceFlow_1fhirz2" sourceRef="SubProcess_0k72z16" targetRef="UserTask_059pb4t" />
-    <bpmn:sequenceFlow id="SequenceFlow_1whv2ep" sourceRef="UserTask_059pb4t" targetRef="Task_1psmrxu" />
+    <bpmn:sequenceFlow id="SequenceFlow_1fhirz2" sourceRef="SubProcess_0k72z16" targetRef="Task_1psmrxu" />
+    <bpmn:serviceTask id="Task_1psmrxu" name="Send calculated data to &#34;Data Collector&#34;" camunda:class="DataSender">
+      <bpmn:incoming>SequenceFlow_1fhirz2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0lv64mp</bpmn:outgoing>
+    </bpmn:serviceTask>
     <bpmn:textAnnotation id="TextAnnotation_1h2rjb5">
       <bpmn:text>Implement in Microservice</bpmn:text>
     </bpmn:textAnnotation>
@@ -163,12 +157,6 @@ if (dmn_output){
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_1y5a1kx_di" bpmnElement="StartEvent_1y5a1kx">
         <dc:Bounds x="232" y="514" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_059pb4t_di" bpmnElement="UserTask_059pb4t">
-        <dc:Bounds x="1452" y="492" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_1psmrxu_di" bpmnElement="Task_1psmrxu">
-        <dc:Bounds x="1592" y="492" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_0lkp32v_di" bpmnElement="Task_0lkp32v">
         <dc:Bounds x="1785" y="170" width="100" height="80" />
@@ -191,10 +179,6 @@ if (dmn_output){
         <di:waypoint x="855" y="210" />
         <di:waypoint x="965" y="210" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1whv2ep_di" bpmnElement="SequenceFlow_1whv2ep">
-        <di:waypoint x="1552" y="532" />
-        <di:waypoint x="1592" y="532" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1ovc355_di" bpmnElement="SequenceFlow_1ovc355">
         <di:waypoint x="1885" y="210" />
         <di:waypoint x="1957" y="210" />
@@ -209,8 +193,8 @@ if (dmn_output){
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0lv64mp_di" bpmnElement="SequenceFlow_0lv64mp">
         <di:waypoint x="1642" y="492" />
-        <di:waypoint x="1642" y="317" />
-        <di:waypoint x="1475" y="317" />
+        <di:waypoint x="1642" y="320" />
+        <di:waypoint x="1475" y="320" />
         <di:waypoint x="1475" y="250" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1xo24sq_di" bpmnElement="SequenceFlow_1xo24sq">
@@ -284,12 +268,15 @@ if (dmn_output){
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1fhirz2_di" bpmnElement="SequenceFlow_1fhirz2">
         <di:waypoint x="1399" y="532" />
-        <di:waypoint x="1452" y="532" />
+        <di:waypoint x="1592" y="532" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0qj6sky_di" bpmnElement="SequenceFlow_0qj6sky">
         <di:waypoint x="1000" y="532" />
         <di:waypoint x="1049" y="532" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1owssq6_di" bpmnElement="Task_1psmrxu">
+        <dc:Bounds x="1592" y="492" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

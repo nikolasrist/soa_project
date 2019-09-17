@@ -3,25 +3,34 @@ package core
 import io.ktor.server.netty.*
 import io.ktor.routing.*
 import io.ktor.application.*
+import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.NotFoundException
 import io.ktor.features.StatusPages
 import io.ktor.http.HttpStatusCode
 import io.ktor.jackson.jackson
+import io.ktor.request.document
+import io.ktor.request.receive
+import io.ktor.request.receiveText
 import io.ktor.response.*
 import io.ktor.server.engine.*
 import opencrx.collectSalesManInformation
+import opencrx.models.ClientInfoDTO
 import orangeHRM.OrangeHRMClient
 import orangeHRM.models.Employee
 import orangeHRM.models.EmployeeListResponse
 import orangeHRM.models.ErrorResponse
 import orangeHRM.utils.printEmployee
 import orangeHRM.utils.printError
+import org.slf4j.event.Level
 
 fun main(args: Array<String>) {
     embeddedServer(Netty, 9050) {
         install(ContentNegotiation){
             jackson{}
+        }
+        install(CallLogging) {
+            level = Level.DEBUG
         }
         install(StatusPages) {
             exception<Throwable> { cause ->
@@ -45,9 +54,25 @@ fun main(args: Array<String>) {
                     val name = call.parameters["name"]
                     call.respond(collectSalesManInformation(name!!))
                 }
+                put("salesman/{name}/bonusInfo") {
+                    val updatedDTO = call.receive<ClientInfoDTO>()
+                    println("UPDATED DTO received:")
+                    println(updatedDTO)
+
+                    call.respond(HttpStatusCode.OK, "Successful updated.")
+                }
             }
         }
     }.start(wait = true)
+}
+
+suspend fun updateSalesman(clientInfoDTO: ClientInfoDTO) : HttpStatusCode {
+    val oHRMClient = OrangeHRMClient()
+    oHRMClient.setToken()
+
+
+
+    return HttpStatusCode.OK
 }
 
 suspend fun getSalesmen(): List<Employee> {

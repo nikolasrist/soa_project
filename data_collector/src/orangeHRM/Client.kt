@@ -13,6 +13,7 @@ import io.ktor.client.features.logging.Logging
 import io.ktor.client.request.forms.submitForm
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.request.put
 import io.ktor.client.response.HttpResponse
 import io.ktor.client.response.readText
 import io.ktor.http.HttpStatusCode
@@ -49,7 +50,6 @@ class OrangeHRMClient {
         }
     }
 
-
     suspend fun getAllEmployees(): Response{
         val httpResponse = client.get<HttpResponse>("$baseUrl$apiBaseUrl$employeesApi")
         if (httpResponse.status != HttpStatusCode.OK) {
@@ -64,6 +64,10 @@ class OrangeHRMClient {
             return ErrorResponse("Failed to retrieve employees.", httpResponse.status)
         }
         return EmployeeListResponse(httpResponse.receive())
+    }
+
+    suspend fun updateEmployee () : Response {
+        val httpResponse = client.put<HttpResponse>()
     }
 
     suspend fun getAllAccounts(): Response {
