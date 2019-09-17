@@ -1,0 +1,23 @@
+<form role="form" name="reviewForm">
+<script cam-script type="text/form-script">
+  camForm.on('form-loaded', function() {
+    // tell the form SDK to fetch the variable named 'combinedResult'
+    camForm.variableManager.fetchVariable('combinedResult');
+    camForm.variableManager.fetchVariable('NameField');
+  });
+  camForm.on('variables-fetched', function() {
+    // work with the variable (bind it to the current AngularJS $scope)
+    $scope.combinedResult = camForm.variableManager.variableValue('combinedResult');
+    $scope.NameField = camForm.variableManager.variableValue('NameField');
+  });
+</script>
+<div>
+  <p>Review for {{NameField}}</p>
+</div>
+<div class="control-group" ng-repeat="result in combinedResult.values">
+  <div>ProductName={{result.productName}}&nbsp:&nbsp Client={{result.clientName}}&nbsp:&nbsp Ranking={{result.clientRanking}}&nbsp:&nbsp Quantity={{result.quantity}}
+    <input id="bonus" label="bonus" class="form-control" type="text" ng-model="result.bonus"  value="{{result.bonus}}"/>
+  </div>
+
+</div>
+</form>

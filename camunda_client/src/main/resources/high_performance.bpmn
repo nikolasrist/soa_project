@@ -111,14 +111,13 @@ if (dmn_output){
     <bpmn:subProcess id="SubProcess_0k72z16">
       <bpmn:incoming>SequenceFlow_0qj6sky</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1fhirz2</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics camunda:collection="${combinedResult.prop(&#34;values&#34;).elements()}" camunda:elementVariable="bonus" />
       <bpmn:startEvent id="StartEvent_0dctqbv">
         <bpmn:outgoing>SequenceFlow_1obo3qh</bpmn:outgoing>
       </bpmn:startEvent>
       <bpmn:endEvent id="EndEvent_162fws5">
         <bpmn:incoming>SequenceFlow_1mbv6w5</bpmn:incoming>
       </bpmn:endEvent>
-      <bpmn:userTask id="UserTask_0i4vt7a" name="Salesman ${bonus}" camunda:assignee="demo">
+      <bpmn:userTask id="UserTask_0i4vt7a" name="Salesman" camunda:formKey="embedded:app:forms/review_form.html" camunda:assignee="demo">
         <bpmn:extensionElements>
           <camunda:inputOutput>
             <camunda:inputParameter name="dmn_output">
