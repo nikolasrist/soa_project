@@ -35,12 +35,9 @@ public class DataSender implements JavaDelegate {
             System.out.println("CombinedResultJson: " + combinedResultJson);
             ObjectMapper om = new ObjectMapper();
             CombinedResult combinedResult = om.readValue(combinedResultJson, CombinedResult.class);
-            System.out.println("CombinedResult: " + combinedResult);
             ClientInfoDTO payload = new ClientInfoDTO();
             payload.setSalesmanName(salesmanName);
             payload.setSalesInfos(combinedResult.getValues());
-            System.out.println(payload);
-            System.out.println("JSON STRING: " + om.writeValueAsString(payload));
             callEndpoint(salesmanName,payload);
         }
 
