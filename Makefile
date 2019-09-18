@@ -7,10 +7,12 @@ include $(ROOT_DIR)/.make.env
 
 confirm:
 	@( read -p "$(RED)Are you sure? [y/N]$(RESET): " sure && case "$$sure" in [yY]) true;; *) false;; esac )
-	
+
 build: ## compile everything
 	cd camunda_client && mvn clean package
 	cd data_collector && gradle build && docker build -t lyr3x/data-collector . && docker push lyr3x/data-collector:latest
+
+deploy: build start## compile everything and start
 
 up: ## Start all or c=<name> containers in foreground
 	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up $(c)
