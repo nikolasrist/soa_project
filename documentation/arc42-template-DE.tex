@@ -5,6 +5,11 @@
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
+\usepackage{lscape}
+\usepackage{graphicx}
+\usepackage{float}
+%    \usepackage{lscape}
+\usepackage{rotating}
 \usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
@@ -208,25 +213,65 @@ Erwartungshaltung\strut
 
 \textbf{Inhalt.}
 
-Randbedingungen und Vorgaben, die ihre Freiheiten bezüglich Entwurf,
-Implementierung oder Ihres Entwicklungsprozesses einschränken. Diese
-Randbedingungen gelten manchmal organisations- oder firmenweit über die
-Grenzen einzelner Systeme hinweg.
+Beschreibung der zu nutzenden externen Systemen
 
-\textbf{Motivation.}
+\textbf{Was ist die prinzipielle Aufgabe der Anwendung OpenCRX? }
+\begin{itemize}
+	\item CRM System
+	\item Account management
+	\item Product and Price Management
+	\item Sales Pipeline
+	\item Issue tracking
+	\item Groupware
+	\item mail, contact and calendar management
+\end{itemize}
 
-Für eine tragfähige Architektur sollten Sie genau wissen, wo Ihre
-Freiheitsgrade bezüglich der Entwurfsentscheidungen liegen und wo Sie
-Randbedingungen beachten müssen. Sie können Randbedingungen vielleicht
-noch verhandeln, zunächst sind sie aber da.
+\textbf{Was ist die prinzipielle Aufgabe der Anwendung OrangeHRM? }
+\begin{itemize}
+	\item an Resource Management
+	\item mance Management
+	\item  Administration and Personal Information Management
+	\item  Recruitment etc.
+	\item  Employee Self Service (Time Tracking)
+\end{itemize}
 
-\textbf{Form.}
+\textbf{Welche grundlegenden Funktionen besitzen diese Anwendungen?}
+OrangeHRM bietet Funktionalitäten zum Verwalten des Personals und alles was dazu gehört:
+\begin{itemize}
+	\item Mitarbeiterverwaltung inkl. Mitarbeiter Self Service
+	\item Dashboards
+	\item Mitarbeiter Training
+	\item Reiseplanung
+	\item Dokumentenmanager
+	\item OpenCRX bietet Funktionalitäten zur Verwaltung von Kunden
+	\item Kundensupport
+	\item Customer Success
+	\item Marketing
+	\item Analytics
+	\item Sales Management
+\end{itemize}
 
-Einfache Tabellen der Randbedingungen mit Erläuterungen. Bei Bedarf
-unterscheiden Sie technische, organisatorische und politische
-Randbedingungen oder übergreifende Konventionen (beispielsweise
-Programmier- oder Versionierungsrichtlinien, Dokumentations- oder
-Namenskonvention).
+\textbf{Welche Geschäftsobjekte werden in OpenCRX bzw. OrangeHRM verwaltet?}
+\begin{itemize}
+	\item Kunden
+	\item Mitarbeiter
+\end{itemize}
+\textbf{Welche Art Schnittstellen bieten OpenCRX bzw. OrangeHRM an?}
+	\begin{itemize}
+	\item OpenCRX:
+	\begin{itemize}
+		\item REST API
+		\item AirSync ActiveSync
+		\item User Interface (WebUI)
+	\end{itemize}
+	\item OrangeHRM:
+		\begin{itemize}
+			\item REST API
+			\item Mobile APP
+			\item User Interface (WebUI)
+		\end{itemize}
+\end{itemize}
+
 
 \hypertarget{section-system-scope-and-context}{%
 \section{Kontextabgrenzung}\label{section-system-scope-and-context}}
@@ -272,19 +317,19 @@ Protokolle der Kommunikation mit den Nachbarsystemen.
 Alle Beteiligten müssen verstehen, welche fachlichen Informationen mit
 der Umwelt ausgetauscht werden.
 
-\textbf{Form.}
+\textbf{Lösung}
 
-Alle Diagrammarten, die das System als Blackbox darstellen und die
-fachlichen Schnittstellen zu den Nachbarsystemen beschreiben.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{"../../../../Google Drive/Lerngruppe_HBRS/mcs/2019_SS/SOA/projekt/uebung6_4_kontext_sicht"}
+	\caption{Fachlicher Kontext}
+	\label{fig:uebung64kontextsicht}
+\end{figure}
 
-Alternativ oder ergänzend können Sie eine Tabelle verwenden. Der Titel
-gibt den Namen Ihres Systems wieder; die drei Spalten sind:
-Kommunikationsbeziehung, Eingabe, Ausgabe.
-
-\textbf{\textless{}Diagramm und/oder Tabelle\textgreater{}}
 
 \textbf{\textless{}optional: Erläuterung der externen fachlichen
 Schnittstellen\textgreater{}}
+
 
 \hypertarget{_technischer_kontext}{%
 \subsection{Technischer Kontext}\label{_technischer_kontext}}
@@ -310,10 +355,8 @@ Beispielsweise UML Deployment-Diagramme mit den Kanälen zu
 Nachbarsystemen, begleitet von einer Tabelle, die Kanäle auf
 Ein-/Ausgaben abbildet.
 
-\textbf{\textless{}Diagramm oder Tabelle\textgreater{}}
+\textbf{Lösung}
 
-\textbf{\textless{}optional: Erläuterung der externen technischen
-Schnittstellen\textgreater{}}
 
 \textbf{\textless{}Mapping fachliche auf technische
 Schnittstellen\textgreater{}}
@@ -360,74 +403,13 @@ auf weitere Ausführungen in Folgeabschnitten.
 \hypertarget{section-building-block-view}{%
 \section{Bausteinsicht}\label{section-building-block-view}}
 
-\textbf{Inhalt.}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{"../../../../Google Drive/Lerngruppe_HBRS/mcs/2019_SS/SOA/projekt/uebung6_4_baustein_sicht"}
+	\caption{Bausteinsicht}
+	\label{fig:uebung64bausteinsicht}
+\end{figure}
 
-Diese Sicht zeigt die statische Zerlegung des Systems in Bausteine sowie
-deren Beziehungen. Beispiele für Bausteine sind unter anderem:
-
-\begin{itemize}
-\item
-  Module
-\item
-  Komponenten
-\item
-  Subsysteme
-\item
-  Klassen
-\item
-  Interfaces
-\item
-  Pakete
-\item
-  Bibliotheken
-\item
-  Frameworks
-\item
-  Schichten
-\item
-  Partitionen
-\item
-  Tiers
-\item
-  Funktionen
-\item
-  Makros
-\item
-  Operationen
-\item
-  Datenstrukturen
-\item
-  \ldots{}
-\end{itemize}
-
-Diese Sicht sollte in jeder Architekturdokumentation vorhanden sein. In
-der Analogie zum Hausbau bildet die Bausteinsicht den
-\emph{Grundrissplan}.
-
-\textbf{Motivation.}
-
-Behalten Sie den Überblick über den Quellcode, indem Sie die statische
-Struktur des Systems durch Abstraktion verständlich machen.
-
-Damit ermöglichen Sie Kommunikation auf abstrakterer Ebene, ohne zu
-viele Implementierungsdetails offenlegen zu müssen.
-
-\textbf{Form.}
-
-Die Bausteinsicht ist eine hierarchische Sammlung von Blackboxen und
-Whiteboxen (siehe Abbildung unten) und deren Beschreibungen.
-
-%\includegraphics{images/05_building_blocks-DE.png}
-
-\textbf{Ebene 1} ist die Whitebox-Beschreibung des Gesamtsystems,
-zusammen mit Blackbox-Beschreibungen der darin enthaltenen Bausteine.
-
-\textbf{Ebene 2} zoomt in einige Bausteine der Ebene 1 hinein. Sie
-enthält somit die Whitebox-Beschreibungen ausgewählter Bausteine der
-Ebene 1, jeweils zusammen mit Blackbox-Beschreibungen darin enthaltener
-Bausteine.
-
-\textbf{Ebene 3} zoomt in einige Bausteine der Ebene 2 hinein, usw.
 
 \hypertarget{_whitebox_gesamtsystem}{%
 \subsection{Whitebox Gesamtsystem}\label{_whitebox_gesamtsystem}}
@@ -634,147 +616,24 @@ y.1\_\textgreater{}}\label{_whitebox_baustein_y_1}}
 
 \emph{\textless{}Whitebox-Template\textgreater{}}
 
-\hypertarget{section-runtime-view}{%
-\section{Laufzeitsicht}\label{section-runtime-view}}
+\hypertarget{section-runtime-view}{\section{Laufzeitsicht}\label{section-runtime-view}}
 
-\textbf{Inhalt.}
+\begin{figure}[H]
+	\centering
+	\rotatebox{90}{\includegraphics[width=1.7\linewidth]{"../../../../Google Drive/Lerngruppe_HBRS/mcs/2019_SS/SOA/projekt/laufzeitsicht_high_performance_bpmn"}}
+	\caption{Laufzeitsicht}
+	\label{fig:laufzeitsichthighperformancebpmn}
+\end{figure}
 
-Diese Sicht erklärt konkrete Abläufe und Beziehungen zwischen Bausteinen
-in Form von Szenarien aus den folgenden Bereichen:
-
-\begin{itemize}
-\item
-  Wichtige Abläufe oder \emph{Features}: Wie führen die Bausteine der
-  Architektur die wichtigsten Abläufe durch?
-\item
-  Interaktionen an kritischen externen Schnittstellen: Wie arbeiten
-  Bausteine mit Nutzern und Nachbarsystemen zusammen?
-\item
-  Betrieb und Administration: Inbetriebnahme, Start, Stop.
-\item
-  Fehler- und Ausnahmeszenarien
-\end{itemize}
-
-Anmerkung: Das Kriterium für die Auswahl der möglichen Szenarien (d.h.
-Abläufe) des Systems ist deren Architekturrelevanz. Es geht nicht darum,
-möglichst viele Abläufe darzustellen, sondern eine angemessene Auswahl
-zu dokumentieren.
-
-\textbf{Motivation.}
-
-Sie sollten verstehen, wie (Instanzen von) Bausteine(n) Ihres Systems
-ihre jeweiligen Aufgaben erfüllen und zur Laufzeit miteinander
-kommunizieren.
-
-Nutzen Sie diese Szenarien in der Dokumentation hauptsächlich für eine
-verständlichere Kommunikation mit denjenigen Stakeholdern, die die
-statischen Modelle (z.B. Bausteinsicht, Verteilungssicht) weniger
-verständlich finden.
-
-\textbf{Form.}
-
-Für die Beschreibung von Szenarien gibt es zahlreiche
-Ausdrucksmöglichkeiten. Nutzen Sie beispielsweise:
-
-\begin{itemize}
-\item
-  Nummerierte Schrittfolgen oder Aufzählungen in Umgangssprache
-\item
-  Aktivitäts- oder Flussdiagramme
-\item
-  Sequenzdiagramme
-\item
-  BPMN (Geschäftsprozessmodell und -notation) oder EPKs
-  (Ereignis-Prozessketten)
-\item
-  Zustandsautomaten
-\item
-  \ldots{}
-\end{itemize}
-
-\hypertarget{__emphasis_bezeichnung_laufzeitszenario_1_emphasis}{%
-\subsection{\texorpdfstring{\emph{\textless{}Bezeichnung
-Laufzeitszenario
-1\textgreater{}}}{\textless{}Bezeichnung Laufzeitszenario 1\textgreater{}}}\label{__emphasis_bezeichnung_laufzeitszenario_1_emphasis}}
-
-\begin{itemize}
-\item
-  \textless{}hier Laufzeitdiagramm oder Ablaufbeschreibung
-  einfügen\textgreater{}
-\item
-  \textless{}hier Besonderheiten bei dem Zusammenspiel der Bausteine in
-  diesem Szenario erläutern\textgreater{}
-\end{itemize}
-
-\hypertarget{__emphasis_bezeichnung_laufzeitszenario_2_emphasis}{%
-\subsection{\texorpdfstring{\emph{\textless{}Bezeichnung
-Laufzeitszenario
-2\textgreater{}}}{\textless{}Bezeichnung Laufzeitszenario 2\textgreater{}}}\label{__emphasis_bezeichnung_laufzeitszenario_2_emphasis}}
-
-\ldots{}
-
-\hypertarget{__emphasis_bezeichnung_laufzeitszenario_n_emphasis}{%
-\subsection{\texorpdfstring{\emph{\textless{}Bezeichnung
-Laufzeitszenario
-n\textgreater{}}}{\textless{}Bezeichnung Laufzeitszenario n\textgreater{}}}\label{__emphasis_bezeichnung_laufzeitszenario_n_emphasis}}
-
-\ldots{}
 
 \hypertarget{section-deployment-view}{%
 \section{Verteilungssicht}\label{section-deployment-view}}
-
-\textbf{Inhalt.}
-
-Die Verteilungssicht beschreibt:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  die technische Infrastruktur, auf der Ihr System ausgeführt wird, mit
-  Infrastrukturelementen wie Standorten, Umgebungen, Rechnern,
-  Prozessoren, Kanälen und Netztopologien sowie sonstigen Bestandteilen,
-  und
-\item
-  die Abbildung von (Software-)Bausteinen auf diese Infrastruktur.
-\end{enumerate}
-
-Häufig laufen Systeme in unterschiedlichen Umgebungen, beispielsweise
-Entwicklung-/Test- oder Produktionsumgebungen. In solchen Fällen sollten
-Sie alle relevanten Umgebungen aufzeigen.
-
-Nutzen Sie die Verteilungssicht insbesondere dann, wenn Ihre Software
-auf mehr als einem Rechner, Prozessor, Server oder Container abläuft
-oder Sie Ihre Hardware sogar selbst konstruieren.
-
-Aus Softwaresicht genügt es, auf die Aspekte zu achten, die für die
-Softwareverteilung relevant sind. Insbesondere bei der
-Hardwareentwicklung kann es notwendig sein, die Infrastruktur mit
-beliebigen Details zu beschreiben.
-
-\textbf{Motivation.}
-
-Software läuft nicht ohne Infrastruktur. Diese zugrundeliegende
-Infrastruktur beeinflusst Ihr System und/oder querschnittliche
-Lösungskonzepte, daher müssen Sie diese Infrastruktur kennen.
-
-\textbf{Form.}
-
-Das oberste Verteilungsdiagramm könnte bereits in Ihrem technischen
-Kontext enthalten sein, mit Ihrer Infrastruktur als EINE Blackbox. Jetzt
-zoomen Sie in diese Infrastruktur mit weiteren Verteilungsdiagrammen
-hinein:
-
-\begin{itemize}
-\item
-  Die UML stellt mit Verteilungsdiagrammen (Deployment diagrams) eine
-  Diagrammart zur Verfügung, um diese Sicht auszudrücken. Nutzen Sie
-  diese, evtl. auch geschachtelt, wenn Ihre Verteilungsstruktur es
-  verlangt.
-\item
-  Falls Ihre Infrastruktur-Stakeholder andere Diagrammarten bevorzugen,
-  die beispielsweise Prozessoren und Kanäle zeigen, sind diese hier
-  ebenfalls einsetzbar.
-\end{itemize}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{"../../../../Google Drive/Lerngruppe_HBRS/mcs/2019_SS/SOA/projekt/verteilungssicht"}
+	\caption{Verteilungssicht}
+	\label{fig:verteilungssicht}
+\end{figure}
 
 \hypertarget{_infrastruktur_ebene_1}{%
 \subsection{Infrastruktur Ebene 1}\label{_infrastruktur_ebene_1}}
@@ -945,69 +804,6 @@ Da im verlaufe des Prozesses auch mit Fremdsystemen kommuniziert werden muss wur
 Um eine konsistene Architektur bereitzustellen bietet der Microservce ebenfalls REST-Schnittstellen an, welche aus der JavaDelegate Klasse aus Camunda heraus aufgerufen wird. 
 Zum vereinfachten deployment des Dienstes wird dieser in einem Docker Container ausgeführt.
 
-\hypertarget{_qualit_tsbaum}{%
-\subsection{Qualitätsbaum}\label{_qualit_tsbaum}}
-
-\textbf{Inhalt.}
-
-Der Qualitätsbaum (à la ATAM) mit Qualitätsszenarien an den Blättern.
-
-\textbf{Motivation.}
-
-Die mit Prioritäten versehene Baumstruktur gibt Überblick über
-%die --- oftmals zahlreichen --- Qualitätsanforderungen.
-
-\begin{itemize}
-\item
-  Baumartige Verfeinerung des Begriffes „Qualität``, mit „Qualität``
-  oder „Nützlichkeit`` als Wurzel.
-\item
-  Mindmap mit Qualitätsoberbegriffen als Hauptzweige
-\end{itemize}
-
-In jedem Fall sollten Sie hier Verweise auf die Qualitätsszenarien des
-folgenden Abschnittes aufnehmen.
-
-\hypertarget{_qualit_tsszenarien}{%
-\subsection{Qualitätsszenarien}\label{_qualit_tsszenarien}}
-
-\textbf{Inhalt.}
-
-Konkretisierung der (in der Praxis oftmals vagen oder impliziten)
-Qualitätsanforderungen durch (Qualitäts-)Szenarien.
-
-Diese Szenarien beschreiben, was beim Eintreffen eines Stimulus auf ein
-System in bestimmten Situationen geschieht.
-
-Wesentlich sind zwei Arten von Szenarien:
-
-\begin{itemize}
-\item
-  Nutzungsszenarien (auch bekannt als Anwendungs- oder
-  Anwendungsfallszenarien) beschreiben, wie das System zur Laufzeit auf
-  einen bestimmten Auslöser reagieren soll. Hierunter fallen auch
-  Szenarien zur Beschreibung von Effizienz oder Performance. Beispiel:
-  Das System beantwortet eine Benutzeranfrage innerhalb einer Sekunde.
-\item
-  Änderungsszenarien beschreiben eine Modifikation des Systems oder
-  seiner unmittelbaren Umgebung. Beispiel: Eine zusätzliche
-  Funktionalität wird implementiert oder die Anforderung an ein
-  Qualitätsmerkmal ändert sich.
-\end{itemize}
-
-\textbf{Motivation.}
-
-Szenarien operationalisieren Qualitätsanforderungen und machen deren
-Erfüllung mess- oder entscheidbar.
-
-Insbesondere wenn Sie die Qualität Ihrer Architektur mit Methoden wie
-ATAM überprüfen wollen, bedürfen die in Abschnitt 1.2 genannten
-Qualitätsziele einer weiteren Präzisierung bis auf die Ebene von
-diskutierbaren und nachprüfbaren Szenarien.
-
-\textbf{Form.}
-
-Entweder tabellarisch oder als Freitext.
 
 \hypertarget{section-technical-risks}{%
 \section{Risiken und technische
