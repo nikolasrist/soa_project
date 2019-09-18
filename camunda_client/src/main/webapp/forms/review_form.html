@@ -15,8 +15,11 @@
   <p>Review for {{NameField}}</p>
 </div>
 <div class="control-group" ng-repeat="result in combinedResult.values">
-  <div>ProductName={{result.productName}}&nbsp:&nbsp Client={{result.clientName}}&nbsp:&nbsp Ranking={{result.clientRanking}}&nbsp:&nbsp Quantity={{result.quantity}}
-    <input id="bonus" label="bonus" class="form-control" type="text" ng-model="result.bonus"  value="{{result.bonus}}" required/>
+  <div>
+    ProductName={{result.productName}}&nbsp:&nbsp Client={{result.clientName}}&nbsp:&nbsp Ranking={{result.clientRanking}}&nbsp:&nbsp Quantity={{result.quantity}}
+  </div>
+  <div>
+    Bonus:<input id="bonus" label="bonus" class="form-control" type="text" ng-model="result.bonus"  value="{{result.bonus}}" required/>
   </div>
 
 </div>
