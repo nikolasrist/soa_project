@@ -439,69 +439,26 @@ relevant sind.
 Solche Konzepte betreffen oft mehrere Bausteine. Dazu können vielerlei
 Themen gehören, beispielsweise:
 
-\begin{itemize}
-\item
-  fachliche Modelle,
-\item
-  eingesetzte Architektur- oder Entwurfsmuster,
-\item
-  Regeln für den konkreten Einsatz von Technologien,
-\item
-%  prinzipielle --- meist technische --- Festlegungen übergreifender Art,
-\item
-  Implementierungsregeln
-\end{itemize}
+\textbf{Architekturstil}\\
+Wir nutzen das Architektur-Muster der Microservices, da wir einen Integrations-Service zwischen den einzelnen Systemen benötigen.
+Dieser soll nur durch eine RESTful-API abstrahiert und darüber angesprochen.
+Diese Abstraktion bietet die Möglichkeit den Service auszutauschen, ohne die Camunda-Platform anpassen zu müssen. 
+Zumindest so lange es keine breaking changes in der API gibt. 
 
-\textbf{Motivation.}
+\textbf{Deployment}\\
+Das einfache Austauschen wird begünstigt durch die Entscheidung, den Service als Docker-Container zur Verfügung zu stellen und zu betreiben.
+Somit ist er System unabhängig und kann im Bedarfsfalls mehrfach deployed werden.
 
-Konzepte bilden die Grundlage für \emph{konzeptionelle Integrität}
-(Konsistenz, Homogenität) der Architektur und damit eine wesentliche
-Grundlage für die innere Qualität Ihrer Systeme.
+\textbf{Workflow-Engine}\\
+Die Camunda Platform wurde als Basis für die Workflow-Implementierung genutzt, da sie eine out of the box Nutzeroberfläche zur Verfügung stellt und somit einen guten Überblick für nicht-technische Mitarbeiter ermöglicht.
+Weiterhin kann der gesamte Prozess mittels BPMN klar visualisiert werden und Camunda bietet ein Nutzeroberfläche, um den aktuellen Stand des Prozesses zu detailliert zu betrachten.
 
-Manche dieser Themen lassen sich nur schwer als Baustein in der
-Architektur unterbringen (z.B. das Thema „Sicherheit``). Hier ist der
-Platz im Template, wo Sie derartige Themen geschlossen behandeln können.
-
-\textbf{Form.}
-
-Kann vielfältig sein:
-
-\begin{itemize}
-\item
-  Konzeptpapiere mit beliebiger Gliederung,
-\item
-  übergreifende Modelle/Szenarien mit Notationen, die Sie auch in den
-  Architektursichten nutzen,
-\item
-  beispielhafte Implementierung speziell für technische Konzepte,
-\item
-  Verweise auf „übliche`` Nutzung von Standard-Frameworks
-  (beispielsweise die Nutzung von Hibernate als Object/Relational
-  Mapper).
-\end{itemize}
-
-\textbf{Struktur.}
-
-Eine mögliche (nicht aber notwendige!) Untergliederung dieses
-Abschnittes könnte wie folgt aussehen (wobei die Zuordnung von Themen zu
-den Gruppen nicht immer eindeutig ist):
-
-\begin{itemize}
-\item
-  Fachliche Konzepte
-\item
-  User Experience (UX)
-\item
-  Sicherheitskonzepte (Safety und Security)
-\item
-  Architektur- und Entwurfsmuster
-\item
-  Unter-der-Haube
-\item
-  Entwicklungskonzepte
-\item
-  Betriebskonzepte
-\end{itemize}
+\textbf{Data-Collector}\\
+Der Data-Collector bildet sozusagen das Herzstück des Gesamtsystems, da es alle drei genutzten Services OpenCRX, OrangeHRM und Camunda miteinander verbindet.
+Dieser Service wurde in der Sprache Kotlin mit dem Web-Framework Ktor entwickelt. 
+Ktor bietet einen modular aufgebauten Web-Server, mit dem man sehr gezielt RESTful APIs implementieren kann.
+Kotlin und Ktor sind state of the art Technologien, die zudem noch direkt mit Java zusammenarbeiten kann und innerhalb des Projektes verwendet werden kann. 
+Das schränkt die Weiterentwicklung auch von nicht Kotlin Entwicklern nicht ein, da es entsprechend auch mit Java weiterentwickelt werden kann.
 
 \includegraphics{images/08-Crosscutting-Concepts-Structure-DE.png}
 
