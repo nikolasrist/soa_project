@@ -15,7 +15,7 @@ services:
             - "8080:8080"
         volumes:
           - "$PWD/camunda_client/target/CamundaClient-1.0.war:/camunda/webapps/CamundaClient-1.0.war"
-        restart: unless-stopped
+        restart: on-failure
 
     postgres:
         image: postgres:9.6
@@ -29,3 +29,4 @@ services:
         ports:
           - "9050:9050"
         hostname: data-collector
+        restart: on-failure
