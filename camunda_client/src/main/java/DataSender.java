@@ -41,14 +41,14 @@ public class DataSender implements JavaDelegate {
             = new NetHttpTransport().createRequestFactory();
         JsonHttpContent jsonHttpContent = new JsonHttpContent(new JacksonFactory(), payload);
         HttpRequest request = requestFactory.buildPutRequest(
-            new GenericUrl("http://192.168.0.2:9050/salesman/" + name.trim().replace(" ", "%20") + "/bonusInfo"),
+            new GenericUrl("http://data-collector:9050/salesman/" + name.trim().replace(" ", "%20") + "/bonusInfo"),
             jsonHttpContent);
 
-        HttpResponse respons = request.execute();
-        if (respons.isSuccessStatusCode()) {
-            return respons.parseAsString();
+        HttpResponse response = request.execute();
+        if (response.isSuccessStatusCode()) {
+            return response.parseAsString();
         } else {
-            throw new HttpResponseException(respons);
+            throw new HttpResponseException(response);
         }
     }
 }
