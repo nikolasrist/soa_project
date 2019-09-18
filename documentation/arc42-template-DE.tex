@@ -422,7 +422,7 @@ auf weitere Ausführungen in Folgeabschnitten.
 \hypertarget{section-building-block-view}{%
 \section{Bausteinsicht}\label{section-building-block-view}}
 
-\begin{figure}[H]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=1.0\linewidth]{"images/uebung6_4_baustein_sicht"}
 	\caption{Bausteinsicht}
@@ -430,213 +430,7 @@ auf weitere Ausführungen in Folgeabschnitten.
 \end{figure}
 
 
-\hypertarget{_whitebox_gesamtsystem}{%
-\subsection{Whitebox Gesamtsystem}\label{_whitebox_gesamtsystem}}
-
-An dieser Stelle beschreiben Sie die Zerlegung des Gesamtsystems anhand
-des nachfolgenden Whitebox-Templates. Dieses enthält:
-
-\begin{itemize}
-\item
-  Ein Übersichtsdiagramm
-\item
-  die Begründung dieser Zerlegung
-\item
-  Blackbox-Beschreibungen der hier enthaltenen Bausteine. Dafür haben
-  Sie verschiedene Optionen:
-
-  \begin{itemize}
-  \item
-    in \emph{einer} Tabelle, gibt einen kurzen und pragmatischen
-    Überblick über die enthaltenen Bausteine sowie deren Schnittstellen.
-  \item
-    als Liste von Blackbox-Beschreibungen der Bausteine, gemäß dem
-    Blackbox-Template (siehe unten). Diese Liste können Sie, je nach
-    Werkzeug, etwa in Form von Unterkapiteln (Text), Unter-Seiten (Wiki)
-    oder geschachtelten Elementen (Modellierungswerkzeug) darstellen.
-  \end{itemize}
-\item
-  (optional:) wichtige Schnittstellen, die nicht bereits im
-  Blackbox-Template eines der Bausteine erläutert werden, aber für das
-  Verständnis der Whitebox von zentraler Bedeutung sind. Aufgrund der
-  vielfältigen Möglichkeiten oder Ausprägungen von Schnittstellen geben
-  wir hierzu kein weiteres Template vor. Im schlimmsten Fall müssen Sie
-  Syntax, Semantik, Protokolle, Fehlerverhalten, Restriktionen,
-  Versionen, Qualitätseigenschaften, notwendige Kompatibilitäten und
-  vieles mehr spezifizieren oder beschreiben. Im besten Fall kommen Sie
-  mit Beispielen oder einfachen Signaturen zurecht.
-\end{itemize}
-
-\emph{\textbf{\textless{}Übersichtsdiagramm\textgreater{}}}
-
-\begin{description}
-\item[Begründung]
-\emph{\textless{}Erläuternder Text\textgreater{}}
-\item[Enthaltene Bausteine]
-\emph{\textless{}Beschreibung der enthaltenen Bausteine
-(Blackboxen)\textgreater{}}
-\item[Wichtige Schnittstellen]
-\emph{\textless{}Beschreibung wichtiger Schnittstellen\textgreater{}}
-\end{description}
-
-Hier folgen jetzt Erläuterungen zu Blackboxen der Ebene 1.
-
-Falls Sie die tabellarische Beschreibung wählen, so werden Blackboxen
-darin nur mit Name und Verantwortung nach folgendem Muster beschrieben:
-
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-\begin{minipage}[b]{0.31\columnwidth}\raggedright
-\textbf{Name}\strut
-\end{minipage} & \begin{minipage}[b]{0.63\columnwidth}\raggedright
-\textbf{Verantwortung}\strut
-\end{minipage}\tabularnewline
-\midrule
-\endhead
-\begin{minipage}[t]{0.31\columnwidth}\raggedright
-\emph{\textless{}Blackbox 1\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright
-~\emph{\textless{}Text\textgreater{}}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.31\columnwidth}\raggedright
-\emph{\textless{}Blackbox 2\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright
-~\emph{\textless{}Text\textgreater{}}\strut
-\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
-
-Falls Sie die ausführliche Liste von Blackbox-Beschreibungen wählen,
-beschreiben Sie jede wichtige Blackbox in einem eigenen
-Blackbox-Template. Dessen Überschrift ist jeweils der Namen dieser
-Blackbox.
-
-\hypertarget{__name_blackbox_1}{%
-\subsubsection{\textless{}Name Blackbox
-1\textgreater{}}\label{__name_blackbox_1}}
-
-Beschreiben Sie die \textless{}Blackbox 1\textgreater{} anhand des
-folgenden Blackbox-Templates:
-
-\begin{itemize}
-\item
-  Zweck/Verantwortung
-\item
-  Schnittstelle(n), sofern diese nicht als eigenständige Beschreibungen
-  herausgezogen sind. Hierzu gehören eventuell auch Qualitäts- und
-  Leistungsmerkmale dieser Schnittstelle.
-\item
-  (Optional) Qualitäts-/Leistungsmerkmale der Blackbox, beispielsweise
-  Verfügbarkeit, Laufzeitverhalten o. Ä.
-\item
-  (Optional) Ablageort/Datei(en)
-\item
-  (Optional) Erfüllte Anforderungen, falls Sie Traceability zu
-  Anforderungen benötigen.
-\item
-  (Optional) Offene Punkte/Probleme/Risiken
-\end{itemize}
-
-\emph{\textless{}Zweck/Verantwortung\textgreater{}}
-
-\emph{\textless{}Schnittstelle(n)\textgreater{}}
-
-\emph{\textless{}(Optional) Qualitäts-/Leistungsmerkmale\textgreater{}}
-
-\emph{\textless{}(Optional) Ablageort/Datei(en)\textgreater{}}
-
-\emph{\textless{}(Optional) Erfüllte Anforderungen\textgreater{}}
-
-\emph{\textless{}(optional) Offene
-Punkte/Probleme/Risiken\textgreater{}}
-
-\hypertarget{__name_blackbox_2}{%
-\subsubsection{\textless{}Name Blackbox
-2\textgreater{}}\label{__name_blackbox_2}}
-
-\emph{\textless{}Blackbox-Template\textgreater{}}
-
-\hypertarget{__name_blackbox_n}{%
-\subsubsection{\textless{}Name Blackbox
-n\textgreater{}}\label{__name_blackbox_n}}
-
-\emph{\textless{}Blackbox-Template\textgreater{}}
-
-\hypertarget{__name_schnittstelle_1}{%
-\subsubsection{\textless{}Name Schnittstelle
-1\textgreater{}}\label{__name_schnittstelle_1}}
-
-\ldots{}
-
-\hypertarget{__name_schnittstelle_m}{%
-\subsubsection{\textless{}Name Schnittstelle
-m\textgreater{}}\label{__name_schnittstelle_m}}
-
-\hypertarget{_ebene_2}{%
-\subsection{Ebene 2}\label{_ebene_2}}
-
-Beschreiben Sie den inneren Aufbau (einiger) Bausteine aus Ebene 1 als
-Whitebox.
-
-Welche Bausteine Ihres Systems Sie hier beschreiben, müssen Sie selbst
-entscheiden. Bitte stellen Sie dabei Relevanz vor Vollständigkeit.
-Skizzieren Sie wichtige, überraschende, riskante, komplexe oder
-besonders volatile Bausteine. Normale, einfache oder standardisierte
-Teile sollten Sie weglassen.
-
-\hypertarget{_whitebox_emphasis_baustein_1_emphasis}{%
-\subsubsection{\texorpdfstring{Whitebox \emph{\textless{}Baustein
-1\textgreater{}}}{Whitebox \textless{}Baustein 1\textgreater{}}}\label{_whitebox_emphasis_baustein_1_emphasis}}
-
-\ldots{}zeigt das Innenleben von \emph{Baustein 1}.
-
-\emph{\textless{}Whitebox-Template\textgreater{}}
-
-\hypertarget{_whitebox_emphasis_baustein_2_emphasis}{%
-\subsubsection{\texorpdfstring{Whitebox \emph{\textless{}Baustein
-2\textgreater{}}}{Whitebox \textless{}Baustein 2\textgreater{}}}\label{_whitebox_emphasis_baustein_2_emphasis}}
-
-\emph{\textless{}Whitebox-Template\textgreater{}}
-
-\ldots{}
-
-\hypertarget{_whitebox_emphasis_baustein_m_emphasis}{%
-\subsubsection{\texorpdfstring{Whitebox \emph{\textless{}Baustein
-m\textgreater{}}}{Whitebox \textless{}Baustein m\textgreater{}}}\label{_whitebox_emphasis_baustein_m_emphasis}}
-
-\emph{\textless{}Whitebox-Template\textgreater{}}
-
-\hypertarget{_ebene_3}{%
-\subsection{Ebene 3}\label{_ebene_3}}
-
-Beschreiben Sie den inneren Aufbau (einiger) Bausteine aus Ebene 2 als
-Whitebox.
-
-Bei tieferen Gliederungen der Architektur kopieren Sie diesen Teil von
-arc42 für die weiteren Ebenen.
-
-\hypertarget{_whitebox_baustein_x_1}{%
-\subsubsection{Whitebox \textless{}\_Baustein
-x.1\_\textgreater{}}\label{_whitebox_baustein_x_1}}
-
-\ldots{}zeigt das Innenleben von \emph{Baustein x.1}.
-
-\emph{\textless{}Whitebox-Template\textgreater{}}
-
-\hypertarget{_whitebox_baustein_x_2}{%
-\subsubsection{Whitebox \textless{}\_Baustein
-x.2\_\textgreater{}}\label{_whitebox_baustein_x_2}}
-
-\emph{\textless{}Whitebox-Template\textgreater{}}
-
-\hypertarget{_whitebox_baustein_y_1}{%
-\subsubsection{Whitebox \textless{}\_Baustein
-y.1\_\textgreater{}}\label{_whitebox_baustein_y_1}}
-
-\emph{\textless{}Whitebox-Template\textgreater{}}
-
 \hypertarget{section-runtime-view}{\section{Laufzeitsicht}\label{section-runtime-view}}
-
 \begin{figure}[H]
 	\centering
 	\rotatebox{90}{\includegraphics[width=1.7\linewidth]{"images/laufzeitsicht_high_performance_bpmn"}}
@@ -654,66 +448,6 @@ y.1\_\textgreater{}}\label{_whitebox_baustein_y_1}}
 	\label{fig:verteilungssicht}
 \end{figure}
 
-\hypertarget{_infrastruktur_ebene_1}{%
-\subsection{Infrastruktur Ebene 1}\label{_infrastruktur_ebene_1}}
-
-An dieser Stelle beschreiben Sie (als Kombination von Diagrammen mit
-Tabellen oder Texten):
-
-\begin{itemize}
-\item
-  die Verteilung des Gesamtsystems auf mehrere Standorte, Umgebungen,
-  Rechner, Prozessoren o. Ä., sowie die physischen Verbindungskanäle
-  zwischen diesen,
-\item
-  wichtige Begründungen für diese Verteilungsstruktur,
-\item
-  Qualitäts- und/oder Leistungsmerkmale dieser Infrastruktur,
-\item
-  Zuordnung von Softwareartefakten zu Bestandteilen der Infrastruktur
-\end{itemize}
-
-Für mehrere Umgebungen oder alternative Deployments kopieren Sie diesen
-Teil von arc42 für alle wichtigen Umgebungen/Varianten.
-
-\emph{\textbf{\textless{}Übersichtsdiagramm\textgreater{}}}
-
-\begin{description}
-\item[Begründung]
-\emph{\textless{}Erläuternder Text\textgreater{}}
-\item[Qualitäts- und/oder Leistungsmerkmale]
-\emph{\textless{}Erläuternder Text\textgreater{}}
-\item[Zuordnung von Bausteinen zu Infrastruktur]
-\emph{\textless{}Beschreibung der Zuordnung\textgreater{}}
-\end{description}
-
-\hypertarget{_infrastruktur_ebene_2}{%
-\subsection{Infrastruktur Ebene 2}\label{_infrastruktur_ebene_2}}
-
-An dieser Stelle können Sie den inneren Aufbau (einiger)
-Infrastrukturelemente aus Ebene 1 beschreiben.
-
-Für jedes Infrastrukturelement kopieren Sie die Struktur aus Ebene 1.
-
-\hypertarget{__emphasis_infrastrukturelement_1_emphasis}{%
-\subsubsection{\texorpdfstring{\emph{\textless{}Infrastrukturelement
-1\textgreater{}}}{\textless{}Infrastrukturelement 1\textgreater{}}}\label{__emphasis_infrastrukturelement_1_emphasis}}
-
-\emph{\textless{}Diagramm + Erläuterungen\textgreater{}}
-
-\hypertarget{__emphasis_infrastrukturelement_2_emphasis}{%
-\subsubsection{\texorpdfstring{\emph{\textless{}Infrastrukturelement
-2\textgreater{}}}{\textless{}Infrastrukturelement 2\textgreater{}}}\label{__emphasis_infrastrukturelement_2_emphasis}}
-
-\emph{\textless{}Diagramm + Erläuterungen\textgreater{}}
-
-\ldots{}
-
-\hypertarget{__emphasis_infrastrukturelement_n_emphasis}{%
-\subsubsection{\texorpdfstring{\emph{\textless{}Infrastrukturelement
-n\textgreater{}}}{\textless{}Infrastrukturelement n\textgreater{}}}\label{__emphasis_infrastrukturelement_n_emphasis}}
-
-\emph{\textless{}Diagramm + Erläuterungen\textgreater{}}
 
 \hypertarget{section-concepts}{%
 \section{Querschnittliche Konzepte}\label{section-concepts}}
@@ -821,7 +555,7 @@ Zur prototypischen Implementierung wurden verschiedene Sprachen und Technologien
 Wie vorgegeben wurde zur modellierung des Workflows das Tool Camunda eingesetzt. Mithilfe von Camunda wurde der gesamte Prozess modeliert und ausgeführt. Das Camunda Cockpit und die Tasklist eignen sich hervorragend zum starten und verwalten der Prozesse. 
 Da im verlaufe des Prozesses auch mit Fremdsystemen kommuniziert werden muss wurde ein Microservice in der Sprache Kotlin entwickelt. Dieser Service übernimmt die Kommunikation mit OrangeHRM und OpenCRX über die dokumentierten REST API's.
 Um eine konsistene Architektur bereitzustellen bietet der Microservce ebenfalls REST-Schnittstellen an, welche aus der JavaDelegate Klasse aus Camunda heraus aufgerufen wird. 
-Zum vereinfachten deployment des Dienstes wird dieser in einem Docker Container ausgeführt.
+Alle Anwendungen werden in eigenen, weitesgehend isolierten, Docker Containern betrieben.
 
 
 \hypertarget{section-technical-risks}{%
