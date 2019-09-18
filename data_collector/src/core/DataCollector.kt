@@ -19,6 +19,7 @@ import io.ktor.server.netty.Netty
 import opencrx.collectSalesManInformation
 import opencrx.models.ClientInfoDTO
 import orangeHRM.OrangeHRMClient
+import orangeHRM.models.BaseResponse
 import orangeHRM.models.Employee
 import orangeHRM.models.EmployeeListResponse
 import orangeHRM.models.ErrorResponse
@@ -56,22 +57,32 @@ fun main(args: Array<String>) {
                     call.respond(collectSalesManInformation(name!!))
                 }
                 put("salesman/{name}/bonusInfo") {
+                    val name = call.parameters["name"]
+                    val salesman = getSalesman(name!!)
                     val updatedDTO = call.receive<ClientInfoDTO>()
+                    println("Employee to be updated:")
+                    println(salesman)
                     println("UPDATED DTO received:")
                     println(updatedDTO)
-
-                    call.respond(HttpStatusCode.OK, "Successful updated.")
+                    call.respond(updateSalesmanBonusSalary(updatedDTO, salesman))
                 }
             }
         }
     }.start(wait = true)
 }
 
-suspend fun updateSalesman(clientInfoDTO: ClientInfoDTO): HttpStatusCode {
+suspend fun updateSalesmanBonusSalary(clientInfoDTO: ClientInfoDTO, salesman: Employee): HttpStatusCode {
     val oHRMClient = OrangeHRMClient()
     oHRMClient.setToken()
-    //todo implement if needed
-    return HttpStatusCode.OK
+    val bonus = clientInfoDTO.salesInfos.stream().mapToInt({it.bonus}).sum().toString()
+    return when (val result = oHRMClient.addBonusSalary(salesman.employeeId, "8", bonus)) {
+        is BaseResponse -> HttpStatusCode.OK
+        is ErrorResponse -> {
+            printError(result)
+            return HttpStatusCode.InternalServerError
+        }
+        else -> HttpStatusCode.Conflict
+    }
 }
 
 suspend fun getSalesmen(): List<Employee> {

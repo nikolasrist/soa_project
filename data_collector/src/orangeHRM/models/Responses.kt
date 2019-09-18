@@ -3,35 +3,9 @@ package orangeHRM.models
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.ktor.client.response.HttpResponse
 import io.ktor.http.HttpStatusCode
 import java.util.*
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-data class Employee(
-    val firstName: String,
-    val lastName: String,
-    val employeeId: String,
-    val jobTitle: String
-)
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-data class EmployeeList(
-    val data: List<Employee>
-)
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-data class Account(
-    val userName: String,
-    val userRole: String,
-    val status: String,
-    val employeeName: String,
-    val employeeId: String
-)
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-data class AccountList(
-    val data: List<Account>
-)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
@@ -41,16 +15,11 @@ data class TokenResponse(
     @JsonProperty("token_type")    val tokenType: String
 )
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-data class Organization(
-    val id: String,
-    val name: String,
-    val email: String?,
-    val country: String,
-    val numberOfEmployees: String
-)
-
 sealed class Response
+
+data class BaseResponse(
+    val data: HttpResponse
+) : Response()
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class EmployeeListResponse(
