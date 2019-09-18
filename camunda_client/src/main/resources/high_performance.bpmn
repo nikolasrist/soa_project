@@ -8,20 +8,20 @@
       <bpmn:lane id="Lane_0qnl8s7" name="Performance Calculation">
         <bpmn:flowNodeRef>Task_1x8u4v6</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_1y5a1kx</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ServiceTask_1rraefl</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_14o8gfi</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>BusinessRuleTask_1wnlaxi</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>SubProcess_0k72z16</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1psmrxu</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_1rraefl</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_14o8gfi</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1lv69z1" name="Data Collector">
         <bpmn:flowNodeRef>EndEvent_0fymlff</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0lkp32v</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0ykk86k</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_160enre</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ServiceTask_0nnc71r</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ServiceTask_0afid4w</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ServiceTask_1srv8mj</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_0afid4w</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_0nnc71r</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:endEvent id="EndEvent_0fymlff">
@@ -40,25 +40,11 @@
       <bpmn:outgoing>SequenceFlow_0kq7hg7</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_19vheyx" sourceRef="ServiceTask_1rraefl" targetRef="ServiceTask_0nnc71r" />
-    <bpmn:sequenceFlow id="SequenceFlow_1dq8h8n" sourceRef="ServiceTask_0nnc71r" targetRef="ServiceTask_0afid4w" />
-    <bpmn:sequenceFlow id="SequenceFlow_1pke29e" sourceRef="ServiceTask_0afid4w" targetRef="ServiceTask_1srv8mj" />
     <bpmn:sequenceFlow id="SequenceFlow_1ovc355" sourceRef="Task_0lkp32v" targetRef="EndEvent_0fymlff" />
     <bpmn:sequenceFlow id="SequenceFlow_05nscxi" sourceRef="Task_0ykk86k" targetRef="Task_0lkp32v" />
     <bpmn:sequenceFlow id="SequenceFlow_0kq7hg7" sourceRef="Task_160enre" targetRef="Task_0ykk86k" />
     <bpmn:sequenceFlow id="SequenceFlow_0lv64mp" sourceRef="Task_1psmrxu" targetRef="Task_160enre" />
     <bpmn:sequenceFlow id="SequenceFlow_1xo24sq" sourceRef="ServiceTask_1srv8mj" targetRef="Task_14o8gfi" />
-    <bpmn:task id="ServiceTask_0nnc71r" name="Collect Data from OrangeHRM">
-      <bpmn:incoming>SequenceFlow_19vheyx</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1dq8h8n</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:task id="ServiceTask_0afid4w" name="Collect Data from OpenCRX">
-      <bpmn:incoming>SequenceFlow_1dq8h8n</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1pke29e</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:task id="ServiceTask_1srv8mj" name="Write Data to CAMUNDA">
-      <bpmn:incoming>SequenceFlow_1pke29e</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1xo24sq</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:userTask id="Task_1x8u4v6" name="Calculate &#34;Client Ranking&#34; for Salesman">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -71,18 +57,7 @@
     <bpmn:startEvent id="StartEvent_1y5a1kx">
       <bpmn:outgoing>SequenceFlow_1yix84q</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:serviceTask id="ServiceTask_1rraefl" name="ServiceClient" camunda:class="ServiceClient">
-      <bpmn:incoming>SequenceFlow_0uiixca</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_19vheyx</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:scriptTask id="Task_14o8gfi" name="prepare dmn output" scriptFormat="javascript">
-      <bpmn:incoming>SequenceFlow_1xo24sq</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0lel8op</bpmn:outgoing>
-      <bpmn:script>var jsonValue = S('{ "values":[] }')
-
-execution.setVariable("combinedResult", jsonValue)</bpmn:script>
-    </bpmn:scriptTask>
-    <bpmn:businessRuleTask id="BusinessRuleTask_1wnlaxi" name="BonusCalculation" camunda:resultVariable="dmn_output" camunda:decisionRef="Decision_1eogn71" camunda:mapDecisionResult="singleResult">
+    <bpmn:businessRuleTask id="BusinessRuleTask_1wnlaxi" name="Calculate Salesman Boni" camunda:resultVariable="dmn_output" camunda:decisionRef="Decision_1eogn71" camunda:mapDecisionResult="singleResult">
       <bpmn:extensionElements>
         <camunda:executionListener event="end">
           <camunda:script scriptFormat="javascript">var combinedResult = execution.getVariable("combinedResult");
@@ -116,7 +91,7 @@ if (dmn_output){
       <bpmn:endEvent id="EndEvent_162fws5">
         <bpmn:incoming>SequenceFlow_1mbv6w5</bpmn:incoming>
       </bpmn:endEvent>
-      <bpmn:userTask id="UserTask_0i4vt7a" name="Salesman" camunda:formKey="embedded:app:forms/review_form.html" camunda:assignee="demo">
+      <bpmn:userTask id="UserTask_0i4vt7a" name="Review calculated Bonus" camunda:formKey="embedded:app:forms/review_form.html" camunda:assignee="demo">
         <bpmn:extensionElements>
           <camunda:inputOutput>
             <camunda:inputParameter name="dmn_output">
@@ -139,10 +114,31 @@ if (dmn_output){
       <bpmn:incoming>SequenceFlow_1fhirz2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0lv64mp</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:textAnnotation id="TextAnnotation_1h2rjb5">
-      <bpmn:text>Implement in Microservice</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_0msxfie" sourceRef="Task_160enre" targetRef="TextAnnotation_1h2rjb5" />
+    <bpmn:task id="ServiceTask_1srv8mj" name="Write Data to CAMUNDA">
+      <bpmn:incoming>SequenceFlow_1pke29e</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1xo24sq</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="ServiceTask_0afid4w" name="Collect Data from OpenCRX">
+      <bpmn:incoming>SequenceFlow_1dq8h8n</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1pke29e</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="ServiceTask_0nnc71r" name="Collect Data from OrangeHRM">
+      <bpmn:incoming>SequenceFlow_19vheyx</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1dq8h8n</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_1pke29e" sourceRef="ServiceTask_0afid4w" targetRef="ServiceTask_1srv8mj" />
+    <bpmn:sequenceFlow id="SequenceFlow_1dq8h8n" sourceRef="ServiceTask_0nnc71r" targetRef="ServiceTask_0afid4w" />
+    <bpmn:serviceTask id="ServiceTask_1rraefl" name="Retrieve needed Data from external" camunda:class="ServiceClient">
+      <bpmn:incoming>SequenceFlow_0uiixca</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_19vheyx</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:scriptTask id="Task_14o8gfi" name="Provide collected Data in Execution-Context" scriptFormat="javascript">
+      <bpmn:incoming>SequenceFlow_1xo24sq</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0lel8op</bpmn:outgoing>
+      <bpmn:script>var jsonValue = S('{ "values":[] }')
+
+execution.setVariable("combinedResult", jsonValue)</bpmn:script>
+    </bpmn:scriptTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_04jwzxq">
@@ -168,16 +164,18 @@ if (dmn_output){
         <dc:Bounds x="1465" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_19vheyx_di" bpmnElement="SequenceFlow_19vheyx">
-        <di:waypoint x="615" y="492" />
-        <di:waypoint x="615" y="250" />
+        <di:waypoint x="580" y="492" />
+        <di:waypoint x="580" y="371" />
+        <di:waypoint x="515" y="371" />
+        <di:waypoint x="515" y="250" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1dq8h8n_di" bpmnElement="SequenceFlow_1dq8h8n">
-        <di:waypoint x="665" y="210" />
-        <di:waypoint x="755" y="210" />
+        <di:waypoint x="565" y="210" />
+        <di:waypoint x="655" y="210" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1pke29e_di" bpmnElement="SequenceFlow_1pke29e">
-        <di:waypoint x="855" y="210" />
-        <di:waypoint x="965" y="210" />
+        <di:waypoint x="755" y="210" />
+        <di:waypoint x="865" y="210" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1ovc355_di" bpmnElement="SequenceFlow_1ovc355">
         <di:waypoint x="1885" y="210" />
@@ -198,14 +196,14 @@ if (dmn_output){
         <di:waypoint x="1475" y="250" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1xo24sq_di" bpmnElement="SequenceFlow_1xo24sq">
-        <di:waypoint x="1015" y="250" />
-        <di:waypoint x="1015" y="327" />
-        <di:waypoint x="778" y="327" />
-        <di:waypoint x="778" y="492" />
+        <di:waypoint x="915" y="250" />
+        <di:waypoint x="915" y="370" />
+        <di:waypoint x="770" y="370" />
+        <di:waypoint x="770" y="492" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0uiixca_di" bpmnElement="SequenceFlow_0uiixca">
         <di:waypoint x="420" y="532" />
-        <di:waypoint x="565" y="532" />
+        <di:waypoint x="530" y="532" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1yix84q_di" bpmnElement="SequenceFlow_1yix84q">
         <di:waypoint x="268" y="532" />
@@ -217,15 +215,8 @@ if (dmn_output){
       <bpmndi:BPMNShape id="Lane_1lv69z1_di" bpmnElement="Lane_1lv69z1" isHorizontal="true">
         <dc:Bounds x="180" y="80" width="2003" height="270" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1h2rjb5_di" bpmnElement="TextAnnotation_1h2rjb5">
-        <dc:Bounds x="1570" y="90" width="100" height="40" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_0msxfie_di" bpmnElement="Association_0msxfie">
-        <di:waypoint x="1557" y="170" />
-        <di:waypoint x="1599" y="130" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_0odni3i_di" bpmnElement="ServiceTask_1rraefl">
-        <dc:Bounds x="565" y="492" width="100" height="80" />
+        <dc:Bounds x="530" y="492" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_16wtlng_di" bpmnElement="Task_1x8u4v6">
         <dc:Bounds x="320" y="492" width="100" height="80" />
@@ -251,20 +242,20 @@ if (dmn_output){
         <di:waypoint x="1151" y="527" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0lel8op_di" bpmnElement="SequenceFlow_0lel8op">
-        <di:waypoint x="828" y="532" />
+        <di:waypoint x="820" y="532" />
         <di:waypoint x="900" y="532" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ScriptTask_0bp2jpl_di" bpmnElement="Task_14o8gfi">
-        <dc:Bounds x="728" y="492" width="100" height="80" />
+        <dc:Bounds x="720" y="492" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_1cjxe8u_di" bpmnElement="ServiceTask_0nnc71r">
-        <dc:Bounds x="565" y="170" width="100" height="80" />
+        <dc:Bounds x="465" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_1daxbix_di" bpmnElement="ServiceTask_0afid4w">
-        <dc:Bounds x="755" y="170" width="100" height="80" />
+        <dc:Bounds x="655" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_08i3uwu_di" bpmnElement="ServiceTask_1srv8mj">
-        <dc:Bounds x="965" y="170" width="100" height="80" />
+        <dc:Bounds x="865" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1fhirz2_di" bpmnElement="SequenceFlow_1fhirz2">
         <di:waypoint x="1399" y="532" />
