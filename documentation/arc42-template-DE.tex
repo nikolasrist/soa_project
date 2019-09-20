@@ -2,6 +2,7 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[]{article}
+\usepackage{mypackages}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -70,35 +71,110 @@
 \makeatother
 
 
-\title{\includegraphics{images/arc42-logo.png} Template}
-\date{2019-01-04}
+%\title{\includegraphics{images/arc42-logo.png} Template}
+%\date{2019-01-04}
+%###############################################################################
+% Grössenangaben zum Dokument etc.\cite{Michaelis}
 
+% vertikal
+%\setlength{\voffset}{-0.5cm}
+%\setlength{\textheight}{23cm}
+%\setlength{\topmargin}{0cm}
+%\setlength{\headheight}{6mm}
+%\setlength{\headsep}{1cm}
+%\setlength{\topskip}{0cm}
+%\setlength{\footskip}{1cm}
+%
+%% horizontal
+%\setlength{\hoffset}{-0.4cm}
+%\setlength{\textwidth}{15.5cm}
+%\setlength{\oddsidemargin}{0.8cm}
+%\setlength{\evensidemargin}{0.8cm}
+%
+%\setlength{\parindent}{0cm}        % kein Einzug bei Paragrafenbeginn
+
+
+%###############################################################################
+% Autor und Abgabedatum ändern
+\def\autor{Nikolas Rist, Kai Bepperling}
+\def\datum{20.~September 2019}
 \begin{document}
-\maketitle
+% Titelseite
 
-\section{}
+%\sloppy
+%\pagestyle{headings}
+%\pagenumbering{roman}
 
-\textbf{Über arc42}
+% Basierend auf der Fachschaftsvorlage
+\begin{titlepage}
+	\textbf{
+		\begin{tabular}[t]{>{\vspace*{0pt}}p{0.45\textwidth}c>{\vspace*{0pt}}p{0.45\textwidth}}
+			{
+				\begin{tabular}{ll}
+					\begin{tabular}{l}
+						\raisebox{1.5\height}{\includegraphics[width=0.13\textwidth]{images/fhlogo.png}} 
+					\end{tabular}
+					&
+					\begin{tabular}{l}
+						{\small{\sffamily Hochschule}}\\
+						{\small{\sffamily Bonn-Rhein-Sieg}}\\
+						{\footnotesize{\itshape University of Applied Sciences}}\\
+						\\
+						{\small{\sffamily Fachbereich Informatik}}\\
+						{\footnotesize{\itshape Computer Science Department}}\\
+					\end{tabular}
+				\end{tabular}
+			}
+			&
+			\hspace*{0.1\textwidth}
+		\end{tabular}
+	} %\textbf
+	
+	
+	\renewcommand{\baselinestretch}{1.4}\normalsize
+	
+	\vspace{3cm}
+	\begin{center}
+		
+		% einen Typ auswählen
+		\begin{Huge}\textbf{Semesterprojekt}\end{Huge}\\
+		\vspace{0.8cm}
+		% einen Studiengang auswählen
+		\begin{Large}\textbf{Serviceorientierte Architekturen im Masterstudiengang Informatik}\end{Large}\\
+		
+		\vspace{2.2cm}
+		\renewcommand{\baselinestretch}{1.2}\normalsize
+		\begin{huge}
+			\textbf{HighPerformance}
+		\end{huge}
+		\renewcommand{\baselinestretch}{1.5}\normalsize
+		\\
+		\vspace{0.8cm}
+		\begin{Large}
+			\textbf{}
+		\end{Large}
+		
+		\vspace{0.7cm}
+		\begin{Large}\textbf{von \autor\ \\}
+		\end{Large}
+	\end{center}
+	
+	\vspace{2cm}
+	
+	\begin{large}
+		\textbf{
+			\begin{tabular}{ll}
+				Erstprüfer:  & Prof. Dr. Sascha Alda\\
+%				Zweitprüfer:  & - \\
+				Eingereicht am: & \datum\ \\
+			\end{tabular}
+		}
+	\end{large}
+\end{titlepage}
 
-arc42, das Template zur Dokumentation von Software- und
-Systemarchitekturen.
-
-Erstellt von Dr. Gernot Starke, Dr. Peter Hruschka und Mitwirkenden.
-
-Template Revision: 7.0 DE (asciidoc-based), January 2017
-
-© We acknowledge that this document uses material from the arc42
-architecture template, \url{http://www.arc42.de}. Created by Dr. Peter
-Hruschka \& Dr. Gernot Starke.
-
-\begin{quote}
-\textbf{Note}
-
-Diese Version des Templates enthält Hilfen und Erläuterungen. Sie dient
-der Einarbeitung in arc42 sowie dem Verständnis der Konzepte. Für die
-Dokumentation eigener System verwenden Sie besser die \emph{plain}
-Version.
-\end{quote}
+\tableofcontents
+\cleardoublepage
+%\pagenumbering{arabic}
 
 \hypertarget{section-introduction-and-goals}{%
 \section{Einführung und Ziele}\label{section-introduction-and-goals}}
@@ -327,45 +403,6 @@ Abbildung \ref{fig:uebung64kontextsicht} zeigt die entsprechenden Kommunikations
 	\label{fig:uebung64kontextsicht}
 \end{figure}
 
-\hypertarget{section-solution-strategy}{%
-\section{Lösungsstrategie}\label{section-solution-strategy}}
-
-\textbf{Inhalt.}
-
-Kurzer Überblick über die grundlegenden Entscheidungen und
-Lösungsansätze, die Entwurf und Implementierung des Systems prägen.
-Hierzu gehören:
-
-\begin{itemize}
-\item
-  Technologieentscheidungen
-\item
-  Entscheidungen über die Top-Level-Zerlegung des Systems,
-  beispielsweise die Verwendung gesamthaft prägender Entwurfs- oder
-  Architekturmuster,
-\item
-  Entscheidungen zur Erreichung der wichtigsten Qualitätsanforderungen
-  sowie
-\item
-  relevante organisatorische Entscheidungen, beispielsweise für
-  bestimmte Entwicklungsprozesse oder Delegation bestimmter Aufgaben an
-  andere Stakeholder.
-\end{itemize}
-
-\textbf{Motivation.}
-
-Diese wichtigen Entscheidungen bilden wesentliche „Eckpfeiler`` der
-Architektur. Von ihnen hängen viele weitere Entscheidungen oder
-Implementierungsregeln ab.
-
-\textbf{Form.}
-
-Fassen Sie die zentralen Entwurfsentscheidungen \textbf{kurz} zusammen.
-Motivieren Sie, ausgehend von Aufgabenstellung, Qualitätszielen und
-Randbedingungen, was Sie entschieden haben und warum Sie so entschieden
-haben. Vermeiden Sie redundante Beschreibungen und verweisen Sie eher
-auf weitere Ausführungen in Folgeabschnitten.
-
 \hypertarget{section-building-block-view}{%
 \section{Bausteinsicht}\label{section-building-block-view}}
 
@@ -443,79 +480,22 @@ Alle Anwendungen werden in eigenen, weitesgehend isolierten, Docker Containern b
 \hypertarget{section-technical-risks}{%
 \section{Risiken und technische
 Schulden}\label{section-technical-risks}}
+\subsection{Skalierung}
+In der aktuellen prototypischen Implementierung exisitieren zwei Skalierungsprobleme. Die erste Herausforderung ist das starten des Prozesses. In der aktuellen Implementierung kann die Bonusberechnung nur für einen Mitarbeiter durchgeführt werden. In einer Weiterentwicklung des Tools müsste es erreicht werden, dass der Prozess automatisch alle Salesmen herausfiltert und die Bonusberechnung startet. 
+Das zweite Problem bezüglich der Skalierung ist die Anforderung, dass der CEO Michael Moore die berechneten Boni manuell überprüfen und freigeben muss. 
+Der implementierte Microservice \emph{data-collector} wurde von Beginn an skalierbar entwickelt, sodass ausschließlich die Anforderung auf Kundenseite angepasst werden muss.
 
-\textbf{Inhalt.}
+\subsection{Risiken und Herausforderungen}
+Im Verlaufe des Projekts haben sich einige Teilbereiche als Herausforderung dargestellt. Der Informationsaustausch zwischen Camunda und dem Microservice bzw. der Entscheidungstabelle war aufgrund unpräziser Dokumentation schwierig. Ebenso war die Erstellung der Camunda Forms nicht offensichtlich dokumentiert, sodass eine weitreichende Recherche durchgeführt werden musste.
 
-Eine nach Prioritäten geordnete Liste der erkannten Architekturrisiken
-und/oder technischen Schulden.
-
-\begin{quote}
-Risikomanagement ist Projektmanagement für Erwachsene.
-
----  Tim Lister Atlantic Systems Guild
-\end{quote}
-
-Unter diesem Motto sollten Sie Architekturrisiken und/oder technische
-Schulden gezielt ermitteln, bewerten und Ihren Management-Stakeholdern
-(z.B. Projektleitung, Product-Owner) transparent machen.
-
-\textbf{Form.}
-
-Liste oder Tabelle von Risiken und/oder technischen Schulden, eventuell
-mit vorgeschlagenen Maßnahmen zur Risikovermeidung, Risikominimierung
-oder dem Abbau der technischen Schulden.
-
-\hypertarget{section-glossary}{%
-\section{Glossar}\label{section-glossary}}
-
-\textbf{Inhalt.}
-
-Die wesentlichen fachlichen und technischen Begriffe, die Stakeholder im
-Zusammenhang mit dem System verwenden.
-
-Nutzen Sie das Glossar ebenfalls als Übersetzungsreferenz, falls Sie in
-mehrsprachigen Teams arbeiten.
-
-\textbf{Motivation.}
-
-Sie sollten relevante Begriffe klar definieren, so dass alle Beteiligten
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  diese Begriffe identisch verstehen, und
-\item
-  vermeiden, mehrere Begriffe für die gleiche Sache zu haben.
-\end{enumerate}
-
+Es stellte sich außerdem heraus dass die eingesetzten Fremdsysteme OpenCRX und OrangeHRM komplex modelierte API's anbieten. Bei OrangeHRM sind zwei verschiedene API versionen dokumentiert, wobei nur eine spezielle Version eingesetzt wird, welche allerdings nicht alle Funktionalitäten anbietet. Aus diesem Grund musste für das Zurückschreiben der berechneten Boni ein \emph{custom-field} angelegt werden.
+\subsection{Offene Punkte}
+In diesem Abschnitt werden die offenen Punkte der prototypischen Implementierung aufgezeigt
 \begin{itemize}
-\item
-  Zweispaltige Tabelle mit \textless{}Begriff\textgreater{} und
-  \textless{}Definition\textgreater{}
-\item
-  Eventuell weitere Spalten mit Übersetzungen, falls notwendig.
+	\item Automatischer wiederholender Start
+	\item Automatische Zuweisung des Prozesses an CEO
+	\item Berechnung für alle Salesmen
+	\item Vollautomatisierung (beschränkt durch Anforderungen des Kunden)
 \end{itemize}
-
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-\begin{minipage}[b]{0.31\columnwidth}\raggedright
-Begriff\strut
-\end{minipage} & \begin{minipage}[b]{0.63\columnwidth}\raggedright
-Definition\strut
-\end{minipage}\tabularnewline
-\midrule
-\endhead
-\begin{minipage}[t]{0.31\columnwidth}\raggedright
-\emph{\textless{}Begriff-1\textgreater{}}\strut
-\end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright
-\emph{\textless{}Definition-1\textgreater{}}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.31\columnwidth}\raggedright
-\emph{\textless{}Begriff-2}\strut
-\end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright
-\emph{\textless{}Definition-2\textgreater{}}\strut
-\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
 
 \end{document}
