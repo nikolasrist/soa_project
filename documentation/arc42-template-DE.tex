@@ -320,12 +320,6 @@ OrangeHRM bietet Funktionalitäten zum Verwalten des Personals und alles was daz
 
 \hypertarget{section-system-scope-and-context}{%
 \section{Kontextabgrenzung}\label{section-system-scope-and-context}}
-\begin{itemize}
-\item
-  Diverse Kontextdiagramme
-\item
-  Listen von Kommunikationsbeziehungen mit deren Schnittstellen
-\end{itemize}
 
 \hypertarget{_fachlicher_kontext}{%
 \subsection{Fachlicher Kontext}\label{_fachlicher_kontext}}
@@ -436,14 +430,10 @@ Abbildung \ref{fig:uebung64kontextsicht} zeigt die entsprechenden Kommunikations
 \hypertarget{section-concepts}{%
 \section{Querschnittliche Konzepte}\label{section-concepts}}
 
-\textbf{Inhalt.}
 
 Dieser Abschnitt beschreibt übergreifende, prinzipielle Regelungen und
 Lösungsansätze, die an mehreren Stellen (=\emph{querschittlich})
 relevant sind.
-
-Solche Konzepte betreffen oft mehrere Bausteine. Dazu können vielerlei
-Themen gehören, beispielsweise:
 
 \textbf{Architekturstil}\\
 Wir nutzen das Architektur-Muster der Microservices, da wir einen Integrations-Service zwischen den einzelnen Systemen benötigen.
@@ -478,8 +468,7 @@ Alle Anwendungen werden in eigenen, weitesgehend isolierten, Docker Containern b
 
 
 \hypertarget{section-technical-risks}{%
-\section{Risiken und technische
-Schulden}\label{section-technical-risks}}
+\section{Retroperspektive}\label{section-technical-risks}}
 \subsection{Skalierung}
 In der aktuellen prototypischen Implementierung exisitieren zwei Skalierungsprobleme. Die erste Herausforderung ist das starten des Prozesses. In der aktuellen Implementierung kann die Bonusberechnung nur für einen Mitarbeiter durchgeführt werden. In einer Weiterentwicklung des Tools müsste es erreicht werden, dass der Prozess automatisch alle Salesmen herausfiltert und die Bonusberechnung startet. 
 Das zweite Problem bezüglich der Skalierung ist die Anforderung, dass der CEO Michael Moore die berechneten Boni manuell überprüfen und freigeben muss. 
@@ -492,10 +481,11 @@ Es stellte sich außerdem heraus dass die eingesetzten Fremdsysteme OpenCRX und 
 \subsection{Offene Punkte}
 In diesem Abschnitt werden die offenen Punkte der prototypischen Implementierung aufgezeigt
 \begin{itemize}
-	\item Automatischer wiederholender Start
+	\item Automatische Prozesswiederholung
 	\item Automatische Zuweisung des Prozesses an CEO
 	\item Berechnung für alle Salesmen
 	\item Vollautomatisierung (beschränkt durch Anforderungen des Kunden)
+	\item API Clients in eigene Services extrahieren
 \end{itemize}
 
 \end{document}
