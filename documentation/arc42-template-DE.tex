@@ -204,6 +204,23 @@ Die verschiedenen Stakeholder, welche im Abschnitt \ref{_stakeholder} beschriebe
  \item Loslösung aus dem Prozess.
 \end{itemize}
 
+\subsection{Szenarien}
+In diesem Abschnitt werden zwei mögliche Nutzungszenarien dargestellt.
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{images/szenario1}
+	\caption{Manuelle Berechnung der Boni}
+	\label{fig:szenario1}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{images/szenario2}
+	\caption{Vollautomatisierte Berechnung der Boni}
+	\label{fig:szenario2}
+\end{figure}
+
+
 \hypertarget{_qualit_tsziele}{%
 \subsection{Qualitätsziele}\label{_qualit_tsziele}}
 
@@ -256,8 +273,6 @@ Erwartungshaltung\strut
 \hypertarget{section-architecture-constraints}{%
 \section{Randbedingungen}\label{section-architecture-constraints}}
 
-\textbf{Inhalt.}
-
 Beschreibung der zu nutzenden externen Systemen
 
 \textbf{Was ist die prinzipielle Aufgabe der Anwendung OpenCRX? }
@@ -273,8 +288,8 @@ Beschreibung der zu nutzenden externen Systemen
 
 \textbf{Was ist die prinzipielle Aufgabe der Anwendung OrangeHRM? }
 \begin{itemize}
-	\item an Resource Management
-	\item mance Management
+	\item Resource Management
+	\item performance Management
 	\item  Administration and Personal Information Management
 	\item  Recruitment etc.
 	\item  Employee Self Service (Time Tracking)
@@ -305,13 +320,13 @@ OrangeHRM bietet Funktionalitäten zum Verwalten des Personals und alles was daz
 	\begin{itemize}
 	\item OpenCRX:
 	\begin{itemize}
-		\item REST API
+		\item RESTful API
 		\item AirSync ActiveSync
 		\item User Interface (WebUI)
 	\end{itemize}
 	\item OrangeHRM:
 		\begin{itemize}
-			\item REST API
+			\item RESTful API
 			\item Mobile APP
 			\item User Interface (WebUI)
 		\end{itemize}
@@ -324,9 +339,10 @@ OrangeHRM bietet Funktionalitäten zum Verwalten des Personals und alles was daz
 \hypertarget{_fachlicher_kontext}{%
 \subsection{Fachlicher Kontext}\label{_fachlicher_kontext}}
 
-Der Prozess kann von einem HR Senior innerhalb von der Camunda Plattform gestartet werden und beim Start wir direkt der entsprechende Mitarbeiter in das angebotene Formular-Feld eingetragen.
+Der Prozess kann von einem HR Senior über das Userinterface der Camunda Plattform (Tasklist) gestartet werden. Beim Start muss der entsprechende Mitarbeiter in das angebotene Formular-Feld eingetragen werden.
 
-Weiterhin wird dem CEO ein entsprechendes Formular, in Camunda, mit einer Aufstellung der berechneten Boni zur Verfügung gestellt, in dem er Korrekturen an den einzelnen Boni vornehmen kann und entsprechend speichern, damit sie im fortlaufenden Prozess berücksichtigt werden.
+Weiterhin wird dem CEO in Camunda ein entsprechendes Formular mit einer Aufstellung der berechneten Boni zur Verfügung gestellt.
+In diesen kann er Korrekturen an den einzelnen Boni vornehmen und entsprechend speichern damit diese im fortlaufenden Prozess berücksichtigt werden.
 
 \hypertarget{_technischer_kontext}{%
 \subsection{Technischer Kontext}\label{_technischer_kontext}}
@@ -350,7 +366,7 @@ data class SalesInfoDTO(
 )
 \end{verbatim}
 
-Der Data-Collector kommuniziert entsprechend über RESTful Schnittstelle mit den Systemen OrangeHRM und OpenCRX, um die entsprechenden Daten zu erfassen.
+Zum kommunizieren mit den externen Systemen, OrangeHRM und OpenCRX, nutzt der Data-Collector eine entsprechende RESTful Schnittstelle.
 
 \textbf{OrangeHRM - Objekte}
 \begin{verbatim}
@@ -437,24 +453,23 @@ relevant sind.
 
 \textbf{Architekturstil}\\
 Wir nutzen das Architektur-Muster der Microservices, da wir einen Integrations-Service zwischen den einzelnen Systemen benötigen.
-Dieser soll nur durch eine RESTful-API abstrahiert und darüber angesprochen.
+Dieser soll nur durch eine RESTful-API abstrahiert und darüber angesprochen werden.
 Diese Abstraktion bietet die Möglichkeit den Service auszutauschen, ohne die Camunda-Platform anpassen zu müssen. 
-Zumindest so lange es keine breaking changes in der API gibt. 
 
 \textbf{Deployment}\\
 Das einfache Austauschen wird begünstigt durch die Entscheidung, den Service als Docker-Container zur Verfügung zu stellen und zu betreiben.
-Somit ist er System unabhängig und kann im Bedarfsfalls mehrfach deployed werden.
+Somit ist er Plattform unabhängig und kann im Bedarfsfalls mehrfach deployed werden.
 
 \textbf{Workflow-Engine}\\
-Die Camunda Platform wurde als Basis für die Workflow-Implementierung genutzt, da sie eine out of the box Nutzeroberfläche zur Verfügung stellt und somit einen guten Überblick für nicht-technische Mitarbeiter ermöglicht.
-Weiterhin kann der gesamte Prozess mittels BPMN klar visualisiert werden und Camunda bietet ein Nutzeroberfläche, um den aktuellen Stand des Prozesses zu detailliert zu betrachten.
+Die Camunda-Platform wurde als Basis für die Workflow-Implementierung genutzt, da sie eine out-of-the-box Nutzeroberfläche zur Verfügung stellt und somit einen guten Überblick für nicht-technische Mitarbeiter ermöglicht.
+Weiterhin kann der gesamte Prozess mittels BPMN standardisiert visualisiert werden. Camunda bietet des Weiteren ein Nutzeroberfläche, um den aktuellen Stand des Prozesses detailliert zu betrachten.
 
 \textbf{Data-Collector}\\
-Der Data-Collector bildet sozusagen das Herzstück des Gesamtsystems, da es alle drei genutzten Services OpenCRX, OrangeHRM und Camunda miteinander verbindet.
-Dieser Service wurde in der Sprache Kotlin mit dem Web-Framework Ktor entwickelt. 
-Ktor bietet einen modular aufgebauten Web-Server, mit dem man sehr gezielt RESTful APIs implementieren kann.
-Kotlin und Ktor sind state of the art Technologien, die zudem noch direkt mit Java zusammenarbeiten kann und innerhalb des Projektes verwendet werden kann. 
-Das schränkt die Weiterentwicklung auch von nicht Kotlin Entwicklern nicht ein, da es entsprechend auch mit Java weiterentwickelt werden kann.
+Der Data-Collector bildet das Herzstück des Gesamtsystems, da es alle drei genutzten Services OpenCRX, OrangeHRM und Camunda miteinander verbindet.
+Dieser Service wurde in der Sprache Kotlin, mit dem Web-Framework Ktor, entwickelt. 
+Ktor bietet einen modular aufgebauten Web-Server, mit dem man leichtgewichtige RESTful APIs implementieren kann.
+Kotlin und Ktor sind \emph{state-of-the-art} Technologien.
+Für eine Weiterentwicklung des Services besteht durch eine solch junge Programmiersprache allerdings kein Risiko, da Kotlin inherent mit Java verwendet werden kann.
 
 \hypertarget{section-design-decisions}{%
 \section{Entwurfsentscheidungen}\label{section-design-decisions}}
@@ -462,9 +477,9 @@ Das schränkt die Weiterentwicklung auch von nicht Kotlin Entwicklern nicht ein,
 Zur prototypischen Implementierung wurden verschiedene Sprachen und Technologien verwendet, welche in diesem Abschnitt erläutert werden.
 
 Wie vorgegeben wurde zur modellierung des Workflows das Tool Camunda eingesetzt. Mithilfe von Camunda wurde der gesamte Prozess modeliert und ausgeführt. Das Camunda Cockpit und die Tasklist eignen sich hervorragend zum starten und verwalten der Prozesse. 
-Da im verlaufe des Prozesses auch mit Fremdsystemen kommuniziert werden muss wurde ein Microservice in der Sprache Kotlin entwickelt. Dieser Service übernimmt die Kommunikation mit OrangeHRM und OpenCRX über die dokumentierten REST API's.
-Um eine konsistene Architektur bereitzustellen bietet der Microservce ebenfalls REST-Schnittstellen an, welche aus der JavaDelegate Klasse aus Camunda heraus aufgerufen wird. 
-Alle Anwendungen werden in eigenen, weitesgehend isolierten, Docker Containern betrieben.
+Da im verlaufe des Prozesses auch mit Fremdsystemen kommuniziert werden muss, wurde ein Microservice in der Sprache Kotlin entwickelt. Dieser Service übernimmt die Kommunikation mit OrangeHRM und OpenCRX über die dokumentierten RESTful API's.
+Um eine konsistene Architektur bereitzustellen bietet der Microservce ebenfalls RESTful-Schnittstellen an, welche aus der JavaDelegate Klasse aus Camunda heraus aufgerufen wird. 
+Alle Anwendungen werden in eigenen, weitesgehend isolierten, und orechestriert in Docker Containern bereitgestellt.
 
 
 \hypertarget{section-technical-risks}{%
