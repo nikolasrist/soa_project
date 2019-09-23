@@ -18,16 +18,20 @@ public class DataSender implements JavaDelegate {
 
     private static Logger LOG = LoggerFactory.getLogger("ServiceClient");
 
+    /**
+     * Implements logic to send calculated boni to the data-collector
+     * @param execution current camunda execution context
+     * @throws Exception
+     */
     public void execute(DelegateExecution execution) throws Exception {
 
-        LOG.info("Send request to Data collector.");
-
+        LOG.debug("Send request to Data collector.");
         Set<String> variableNames = execution.getVariableNames();
-        LOG.info("Variables: {}", variableNames);
+        LOG.debug("Variables: {}", variableNames);
         String salesmanName = (String) execution.getVariable("NameField");
-        LOG.info("Salesman chosen: {}", salesmanName);
+        LOG.debug("Salesman chosen: {}", salesmanName);
         String combinedResultJson = execution.getVariableTyped("combinedResult").getValue().toString();
-        System.out.println("CombinedResultJson: " + combinedResultJson);
+
         ObjectMapper om = new ObjectMapper();
         CombinedResult combinedResult = om.readValue(combinedResultJson, CombinedResult.class);
         ClientInfoDTO payload = new ClientInfoDTO();
@@ -36,6 +40,13 @@ public class DataSender implements JavaDelegate {
         callEndpoint(salesmanName, payload);
     }
 
+    /**
+     * Calls data-collector API endpoint to write calculated boni back to OrangeHRM
+     * @param name specific Salesman name
+     * @param payload Includes ClientInfoDTO and calculated boni
+     * @return HTTP raw response as string
+     * @throws IOException
+     */
     private static String callEndpoint(String name, ClientInfoDTO payload) throws IOException {
         HttpRequestFactory requestFactory
             = new NetHttpTransport().createRequestFactory();

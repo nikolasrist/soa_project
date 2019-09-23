@@ -25,8 +25,7 @@ public class ServiceClient implements JavaDelegate {
         String salesmanName = (String) execution.getVariable("NameField");
         LOG.info("Salesman chosen: {}", salesmanName);
         String response = callEndpoint(salesmanName);
-//        Salesman salesman = mapSalesmanResponse(response);
-//        System.out.println(salesman);
+
         ClientInfoDTO clientInfo = mapClientInfoDTOResponse(response);
         ObjectValue typedSalesInfoListObject =
             Variables.objectValue(clientInfo.getSalesInfo()).serializationDataFormat("application/json").create();
@@ -35,16 +34,34 @@ public class ServiceClient implements JavaDelegate {
         System.out.println(clientInfo);
     }
 
+    /**
+     * Creates an Salesman object from an JSON String
+     * @param response JSON body from HTTP response
+     * @return Salesman Object
+     * @throws IOException
+     */
     static Salesman mapSalesmanResponse(String response) throws IOException {
         ObjectMapper oMapper = new ObjectMapper();
         return oMapper.readValue(response, Salesman.class);
     }
 
+    /**
+     * Creates an ClientInfoDTO object from an JSON String
+     * @param response JSON body from HTTP response
+     * @return ClientInfoDTO Object
+     * @throws IOException
+     */
     static ClientInfoDTO mapClientInfoDTOResponse(String response) throws IOException {
         ObjectMapper oMapper = new ObjectMapper();
         return oMapper.readValue(response, ClientInfoDTO.class);
     }
 
+    /**
+     * Calls data-collector API endpoint to retrieve information for a specific Salesman
+     * @param name Specific salesman name
+     * @return JSON String
+     * @throws IOException
+     */
     public static String callEndpoint(String name) throws IOException {
         HttpRequestFactory requestFactory
                 = new NetHttpTransport().createRequestFactory();
